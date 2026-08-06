@@ -20,6 +20,7 @@ namespace Apresentacao_J.iary.ModuloTarefa
         private List<ValoresCheckBox> CheckBoxes = new List<ValoresCheckBox>();
         private Usuario Logged;
         private Tarefa tarefa;
+        private string _MensagemErro;
         public UCTarefa(Usuario usuarioLogged)
         {
             Logged = usuarioLogged;
@@ -42,8 +43,28 @@ namespace Apresentacao_J.iary.ModuloTarefa
             tarefa.Descricao = textBoxDescricao.Text;
             tarefa.Prioridade = comboBoxPrioridade.SelectedItem.ToString()[0];
             tarefa.Status = comboBoxStatus.SelectedItem.ToString()[0];
+            ObterDadosGrid();
             tarefa.CheckBoxes = CheckBoxes;
-            tarefa.Aramazenamento = comboBoxArmazenamento.SelectedItem.ToString()[0];
+            tarefa.Armazenamento = comboBoxArmazenamento.SelectedItem.ToString()[0];
+
+            MessageBox.Show($"Prioridade: {tarefa.Prioridade}. \nStatus: {tarefa.Status}\n Armazenamento: {tarefa.Armazenamento}");
+        }
+
+        private void ObterDadosGrid()
+        {
+            foreach (DataGridViewRow row in dataGridViewCheck.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                string texto = row.Cells["colCheck"].Value?.ToString();
+
+                var valor = new ValoresCheckBox
+                {
+                    CheckBoxe = texto
+                };
+
+                CheckBoxes.Add(valor);
+            }
         }
 
         private void buttonAddCheck_Click(object sender, EventArgs e)
@@ -52,14 +73,40 @@ namespace Apresentacao_J.iary.ModuloTarefa
             checkBox.CheckBoxe = textBoxCheck.Text;
             CheckBoxes.Add(checkBox);
 
-            checkedListBox.Items.Add(textBoxCheck.Text);
+            if(CheckBoxes.Count == 1)
+                PersonalizarGridCheck();
+
+
+            int rowIndex = dataGridViewCheck.Rows.Add();
+            dataGridViewCheck.Rows[rowIndex].Cells[0].Value = textBoxCheck.Text;
+
             textBoxCheck.Clear();
         }
 
         private void buttonFinalizar_Click(object sender, EventArgs e)
         {
             ObterDados();
-            GravarDados(tarefa);
+
+            var resultado = GravarDados(tarefa);
+            if (resultado.IsFailed)
+            {
+                CheckBoxes.Clear();
+                foreach (var erro in resultado.Errors)
+                {
+
+                    if (erro.Message.Contains("TITULO"))
+                    {
+                        labelErroTitulo.Text = erro.Message;
+                    }
+                    else if (erro.Message.Contains("DESCRIÇÃO"))
+                    {
+                        labelErroDescricao.Text = erro.Message;
+                    }
+
+                }
+            }
+
+
         }
 
         private void textBoxCheck_KeyDown(object sender, KeyEventArgs e)
@@ -70,11 +117,28 @@ namespace Apresentacao_J.iary.ModuloTarefa
                 checkBox.CheckBoxe = textBoxCheck.Text;
                 CheckBoxes.Add(checkBox);
 
-                checkedListBox.Items.Add(textBoxCheck.Text);
+                if (CheckBoxes.Count == 1)
+                    PersonalizarGridCheck();
+
+
+                int rowIndex = dataGridViewCheck.Rows.Add();
+                dataGridViewCheck.Rows[rowIndex].Cells[0].Value = textBoxCheck.Text;
                 textBoxCheck.Clear();
 
                 e.SuppressKeyPress = true;
             }
+        }
+        private bool ValidarTabelas()
+        {
+            return CheckBoxes.Count == 0; ;
+        }
+        private void PersonalizarGridCheck()
+        {
+
+            dataGridViewCheck.Columns.Add("colCheck", "Valores");
+            dataGridViewCheck.Columns[0].Width = 576; 
+            dataGridViewCheck.Columns[0].Resizable = DataGridViewTriState.False; 
+
         }
     }
 }

@@ -41,9 +41,12 @@
             comboBoxArmazenamento = new ComboBox();
             labelArmazenamento = new Label();
             buttonFinalizar = new Button();
-            checkedListBox = new CheckedListBox();
             labelCheckBox = new Label();
             comboBoxStatus = new ComboBox();
+            dataGridViewCheck = new DataGridView();
+            labelErroTitulo = new Label();
+            labelErroDescricao = new Label();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewCheck).BeginInit();
             SuspendLayout();
             // 
             // labelTitulo
@@ -78,6 +81,7 @@
             // 
             // comboBoxPrioridade
             // 
+            comboBoxPrioridade.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxPrioridade.FlatStyle = FlatStyle.System;
             comboBoxPrioridade.Font = new Font("Segoe UI", 12F);
             comboBoxPrioridade.FormattingEnabled = true;
@@ -152,6 +156,7 @@
             // 
             // comboBoxArmazenamento
             // 
+            comboBoxArmazenamento.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxArmazenamento.FlatStyle = FlatStyle.System;
             comboBoxArmazenamento.Font = new Font("Segoe UI", 12F);
             comboBoxArmazenamento.FormattingEnabled = true;
@@ -185,14 +190,6 @@
             buttonFinalizar.UseVisualStyleBackColor = false;
             buttonFinalizar.Click += buttonFinalizar_Click;
             // 
-            // checkedListBox
-            // 
-            checkedListBox.FormattingEnabled = true;
-            checkedListBox.Location = new Point(783, 104);
-            checkedListBox.Name = "checkedListBox";
-            checkedListBox.Size = new Size(629, 532);
-            checkedListBox.TabIndex = 14;
-            // 
             // labelCheckBox
             // 
             labelCheckBox.AutoSize = true;
@@ -205,6 +202,7 @@
             // 
             // comboBoxStatus
             // 
+            comboBoxStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxStatus.FlatStyle = FlatStyle.System;
             comboBoxStatus.Font = new Font("Segoe UI", 12F);
             comboBoxStatus.FormattingEnabled = true;
@@ -214,14 +212,45 @@
             comboBoxStatus.Size = new Size(191, 36);
             comboBoxStatus.TabIndex = 17;
             // 
+            // dataGridViewCheck
+            // 
+            dataGridViewCheck.BackgroundColor = Color.White;
+            dataGridViewCheck.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCheck.Location = new Point(783, 106);
+            dataGridViewCheck.MultiSelect = false;
+            dataGridViewCheck.Name = "dataGridViewCheck";
+            dataGridViewCheck.RowHeadersWidth = 51;
+            dataGridViewCheck.Size = new Size(629, 532);
+            dataGridViewCheck.TabIndex = 19;
+            // 
+            // labelErroTitulo
+            // 
+            labelErroTitulo.AutoSize = true;
+            labelErroTitulo.ForeColor = Color.Red;
+            labelErroTitulo.Location = new Point(210, 82);
+            labelErroTitulo.Name = "labelErroTitulo";
+            labelErroTitulo.Size = new Size(0, 20);
+            labelErroTitulo.TabIndex = 20;
+            // 
+            // labelErroDescricao
+            // 
+            labelErroDescricao.AutoSize = true;
+            labelErroDescricao.ForeColor = Color.Red;
+            labelErroDescricao.Location = new Point(256, 305);
+            labelErroDescricao.Name = "labelErroDescricao";
+            labelErroDescricao.Size = new Size(0, 20);
+            labelErroDescricao.TabIndex = 21;
+            // 
             // UCTarefa
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            Controls.Add(labelErroDescricao);
+            Controls.Add(labelErroTitulo);
+            Controls.Add(dataGridViewCheck);
             Controls.Add(comboBoxStatus);
             Controls.Add(labelCheckBox);
-            Controls.Add(checkedListBox);
             Controls.Add(buttonFinalizar);
             Controls.Add(comboBoxArmazenamento);
             Controls.Add(labelArmazenamento);
@@ -237,6 +266,7 @@
             Controls.Add(labelTitulo);
             Name = "UCTarefa";
             Size = new Size(1600, 835);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewCheck).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -256,8 +286,11 @@
         public ComboBox comboBoxArmazenamento;
         private Label labelArmazenamento;
         private Button buttonFinalizar;
-        private CheckedListBox checkedListBox;
         private Label labelCheckBox;
         public ComboBox comboBoxStatus;
+        private ListBox listBox1;
+        public DataGridView dataGridViewCheck;
+        private Label labelErroTitulo;
+        private Label labelErroDescricao;
     }
 }
