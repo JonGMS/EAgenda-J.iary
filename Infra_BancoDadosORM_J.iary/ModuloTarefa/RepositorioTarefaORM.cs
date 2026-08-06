@@ -1,4 +1,5 @@
-﻿using Dominio_J.iary.ModuloTarefa;
+﻿using Dominio_J.iary.ModuloLogin;
+using Dominio_J.iary.ModuloTarefa;
 using Dominio_J.iary.ModuloUsuario;
 using Infra_BancoDadosORM_J.iary.Compartilhado;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ namespace Infra_BancoDadosORM_J.iary.ModuloTarefa
         private DbContext dbContext;
         public RepositorioTarefaORM(JiaryDbContext dbContext)
         {
+            Tarefa = dbContext.Set<Tarefa>();
             this.dbContext = dbContext;   
         }
         private DbSet<Tarefa> Tarefa;
@@ -42,6 +44,11 @@ namespace Infra_BancoDadosORM_J.iary.ModuloTarefa
         public List<Tarefa> SelecionarTodos()
         {
             throw new NotImplementedException();
+        }
+
+        public Tarefa SelecionarTarefaPorTitulo(string titulo)
+        {
+            return Tarefa.FirstOrDefault(x => x.Titulo == titulo);
         }
     }
 }
