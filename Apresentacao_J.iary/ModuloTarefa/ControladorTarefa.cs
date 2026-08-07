@@ -29,19 +29,7 @@ namespace Apresentacao_J.iary.ModuloTarefa
 
         public override void Inserir()
         {
-            MessageBox.Show("Entrou no método Inserir");
 
-            if (ucInserir == null)
-            {
-                MessageBox.Show("ucInserir está nulo");
-                return;
-            }
-
-            if (ucInserir.panelFormulario == null)
-            {
-                MessageBox.Show("panelFormulario está nulo");
-                return;
-            }
             UCTarefa tarefa = new UCTarefa(Logged);
             ucInserir.panelFormulario.Controls.Clear();
             tarefa.GravarDados = Servico.Inserir;
