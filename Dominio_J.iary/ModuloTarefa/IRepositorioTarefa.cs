@@ -9,6 +9,6 @@ namespace Dominio_J.iary.ModuloTarefa
 {
     public interface IRepositorioTarefa : IRepositorioBase<Tarefa>
     {
-
+        Tarefa SelecionarTarefaPorTitulo(string titulo);
     }
 }
