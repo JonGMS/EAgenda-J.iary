@@ -30,9 +30,11 @@ namespace Aplicacao_J.iary.ModuloUsuario
                 var UsuarioEncontrado = RepositorioUsuario.SelecionarUsuarioPorLogin(usuario.Username);
                 if (UsuarioEncontrado == null)
                     return Result.Fail("Usuario não encontrado");
-                bool comparacao = UsuarioEncontrado.Username == usuario.Username && UsuarioEncontrado.Password == usuario.Password;
-                logged = new Login(UsuarioEncontrado, comparacao);
-
+                bool comparacao = UsuarioEncontrado.Username == usuario.Username && UsuarioEncontrado.Password == usuario.Password;                logged = new Login(UsuarioEncontrado, comparacao);
+                if (!comparacao)
+                {
+                    return Result.Fail("Usuario ou senha incorreto");
+                }
                 return Result.Ok(logged);
             }
             catch (Exception ex)
