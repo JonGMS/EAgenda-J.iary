@@ -23,8 +23,8 @@ namespace Dominio_J.iary.ModuloUsuario
               .MinimumLength(8).WithMessage("'Password' deve ter no mínimo 8 (oito) caracteres!");
 
             RuleFor(x => x.Email)
-              .NotEmpty().WithMessage("O campo 'Username' é obrigatório!")
-              .NotNull().WithMessage("O campo 'Username' é obrigatório!")
+              .NotEmpty().WithMessage("O campo 'Email' é obrigatório!")
+              .NotNull().WithMessage("O campo 'Email' é obrigatório!")
               .Matches(@"^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]*$").WithMessage("O campo 'Username' não aceita caracteres especiais e números!")
               .MinimumLength(6).WithMessage("O campo 'Email' deve ter no mínimo 6 (seis) caracteres!");
         }
