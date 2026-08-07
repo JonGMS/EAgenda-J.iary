@@ -266,6 +266,7 @@
             Controls.Add(labelTitulo);
             Name = "UCTarefa";
             Size = new Size(1600, 835);
+            Load += UCTarefa_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewCheck).EndInit();
             ResumeLayout(false);
             PerformLayout();

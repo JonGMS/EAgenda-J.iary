@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Apresentacao_J.iary.ModuloTarefa
 {
@@ -52,15 +53,22 @@ namespace Apresentacao_J.iary.ModuloTarefa
 
         private void ObterDadosGrid()
         {
+            CheckBoxes.Clear();
             foreach (DataGridViewRow row in dataGridViewCheck.Rows)
             {
                 if (row.IsNewRow) continue;
 
                 string texto = row.Cells["colCheck"].Value?.ToString();
 
+                if (string.IsNullOrWhiteSpace(texto))
+                    continue;
+
                 var valor = new ValoresCheckBox
                 {
-                    CheckBoxe = texto
+                    CheckBoxe = texto,
+                    IdUsuario = Logged.Id,
+                    Tarefa = tarefa
+
                 };
 
                 CheckBoxes.Add(valor);
@@ -73,7 +81,7 @@ namespace Apresentacao_J.iary.ModuloTarefa
             checkBox.CheckBoxe = textBoxCheck.Text;
             CheckBoxes.Add(checkBox);
 
-            if(CheckBoxes.Count == 1)
+            if (CheckBoxes.Count == 1)
                 PersonalizarGridCheck();
 
 
@@ -105,7 +113,12 @@ namespace Apresentacao_J.iary.ModuloTarefa
 
                 }
             }
-
+            else
+            {
+                textBoxTitulo.Clear();
+                textBoxDescricao.Clear();
+                CheckBoxes.Clear();
+            }
 
         }
 
@@ -136,9 +149,16 @@ namespace Apresentacao_J.iary.ModuloTarefa
         {
 
             dataGridViewCheck.Columns.Add("colCheck", "Valores");
-            dataGridViewCheck.Columns[0].Width = 576; 
-            dataGridViewCheck.Columns[0].Resizable = DataGridViewTriState.False; 
+            dataGridViewCheck.Columns[0].Width = 576;
+            dataGridViewCheck.Columns[0].Resizable = DataGridViewTriState.False;
 
+        }
+
+        private void UCTarefa_Load(object sender, EventArgs e)
+        {
+            comboBoxArmazenamento.SelectedIndex = 0;
+            comboBoxStatus.SelectedIndex = 0;
+            comboBoxPrioridade.SelectedIndex = 0;
         }
     }
 }
