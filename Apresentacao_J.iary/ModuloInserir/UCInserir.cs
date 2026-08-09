@@ -33,7 +33,7 @@ namespace Apresentacao_J.iary.ModuloInserir
                 ServiceLocator.ExecutarInsercao("ControladorTarefa");
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -46,5 +46,9 @@ namespace Apresentacao_J.iary.ModuloInserir
             return this.controlador = controladorbase;
         }
 
+        private void buttonNota_Click(object sender, EventArgs e)
+        {
+            ServiceLocator.ExecutarInsercao("ControladorNota");
+        }
     }
 }
