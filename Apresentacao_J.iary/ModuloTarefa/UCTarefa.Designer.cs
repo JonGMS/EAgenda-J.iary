@@ -147,10 +147,12 @@
             // 
             buttonAddCheck.FlatAppearance.BorderSize = 3;
             buttonAddCheck.FlatStyle = FlatStyle.Popup;
+            buttonAddCheck.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonAddCheck.Location = new Point(515, 492);
             buttonAddCheck.Name = "buttonAddCheck";
             buttonAddCheck.Size = new Size(49, 34);
             buttonAddCheck.TabIndex = 10;
+            buttonAddCheck.Text = "+";
             buttonAddCheck.UseVisualStyleBackColor = true;
             buttonAddCheck.Click += buttonAddCheck_Click;
             // 
