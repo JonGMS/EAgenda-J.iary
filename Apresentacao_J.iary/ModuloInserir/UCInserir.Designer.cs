@@ -59,6 +59,7 @@
             buttonNota.TabIndex = 1;
             buttonNota.Text = "Nota";
             buttonNota.UseVisualStyleBackColor = false;
+            buttonNota.Click += buttonNota_Click;
             // 
             // panelFormulario
             // 
