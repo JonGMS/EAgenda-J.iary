@@ -19,6 +19,9 @@ using Apresentacao_J.iary.ModuloInserir;
 using Apresentacao_J.iary.ModuloNota;
 using Infra_BancoDadosORM_J.iary.ModuloNota;
 using Aplicacao_J.iary.ModuloNota;
+using Aplicacao_J.iary.ModuloCategoria;
+using Apresentacao_J.iary.ModuloCategoria;
+using Infra_BancoDadosORM_J.iary.ModuloCategoria;
 
 namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
 {
@@ -99,12 +102,16 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             var controladorTarefa = new ControladorTarefa(ucInserir, servicoTarefa, Logged);
             inserir["ControladorTarefa"] = controladorTarefa.Inserir;
 
-            var ucNota = new UCNotas(Logged);
+            var ucNota = new UCNotas(Logged, this);
             var repositorioNota = new RepositorioNotaORM(contextoDadosOrm);
             var servicoNota = new ServicoNota(contextoDadosOrm, repositorioNota);
-            var controladorNota = new ControladorNota(ucInserir, servicoNota, Logged);
+            var controladorNota = new ControladorNota(ucInserir, servicoNota, Logged, this);
             inserir["ControladorNota"] = controladorNota.Inserir;
 
+            var repositorioCategoria = new RepositorioCategoriaORM();
+            var servicoCategoria = new ServicoCategoria(contextoDadosOrm, repositorioCategoria);
+            var controladorCategoria = new ControladorCategoria(servicoCategoria, Logged);
+            inserir["ControladorCategoria"] = controladorCategoria.Inserir;
         }
 
 
@@ -118,6 +125,8 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             {
                 inserir["ControladorNota"]();
             }
+            else if (nomeControlador == "ControladorCategoria")
+                inserir["ControladorCategoria"]();
         }
     }
 }
