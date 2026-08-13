@@ -26,12 +26,12 @@ namespace Apresentacao_J.iary.ModuloCategoria
         {
             get => categoria; set => categoria = value;
         }
-        public Func<Categoria, Result<Categoria>> GravarDados { get; set; }
+        public Func<Categoria, Usuario, Result<Categoria>> GravarDados { get; set; }
 
         private void buttonAdicionarCategoria_Click(object sender, EventArgs e)
         {
             ObterDados();
-            var resultado = GravarDados(Categoria);
+            var resultado = GravarDados(Categoria, Logged);
             if (resultado.IsFailed)
             {
                 foreach (var erro in resultado.Errors)
@@ -50,7 +50,7 @@ namespace Apresentacao_J.iary.ModuloCategoria
             }
             else 
             {
-                this.ParentForm.Close();
+                this.ParentForm.Hide();
             }
         }
 
@@ -67,7 +67,7 @@ namespace Apresentacao_J.iary.ModuloCategoria
 
         private void buttonFechar_Click(object sender, EventArgs e)
         {
-            this.ParentForm.Close();
+            this.ParentForm.Hide();
         }
     }
 }
