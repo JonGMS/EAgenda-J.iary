@@ -1,9 +1,11 @@
 ﻿using Dominio_J.iary.Compartilhado;
 using Dominio_J.iary.ModuloCategoria;
+using Dominio_J.iary.ModuloContatos;
 using Dominio_J.iary.ModuloTarefa;
 using Dominio_J.iary.ModuloUsuario;
 using FluentResults;
 using FluentValidation.Results;
+using Infra_BancoDadosORM_J.iary.Compartilhado;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +18,10 @@ namespace Aplicacao_J.iary.ModuloCategoria
     {
         private IRepositorioCategoria RepositorioCategoria;
         private IContextoPersistencia ContextoPersistencia;
-        public ServicoCategoria(IContextoPersistencia contextoPersistencia, IRepositorioCategoria repositorioCategoria)
+        private JiaryDbContext contexto;
+        public ServicoCategoria(IContextoPersistencia contextoPersistencia, IRepositorioCategoria repositorioCategoria, JiaryDbContext contexto)
         {
+            this.contexto = contexto;
             ContextoPersistencia = contextoPersistencia;
             RepositorioCategoria = repositorioCategoria;
         }
@@ -30,6 +34,12 @@ namespace Aplicacao_J.iary.ModuloCategoria
                 {
                     return resultadoValidacao;
                 }
+
+                contexto.Attach(logado);
+
+                categoria.Usuario = logado;
+                categoria.UsuarioId = logado.Id;
+
                 RepositorioCategoria.Inserir(categoria);
                 ContextoPersistencia.GravarDados();
 
@@ -85,5 +95,23 @@ namespace Aplicacao_J.iary.ModuloCategoria
                 return Result.Fail(ex.Message);
             }
         }
+        public Result<List<Categoria>> SelecionarTodos(Usuario logado) 
+        {
+            try
+            {
+                List<Categoria> categorias = new List<Categoria>();
+
+                categorias = RepositorioCategoria.SelecionarTodos(logado);
+
+                return Result.Ok(categorias);
+            }
+            catch(Exception ex)
+            {
+                return Result.Fail("Falha ao listar categorias" + ex);
+            }
+            
+        
+        }
+
     }
 }
