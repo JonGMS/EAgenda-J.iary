@@ -1,4 +1,5 @@
 ﻿using Dominio_J.iary.Compartilhado;
+using Infra_BancoDadosORM_J.iary.ModuloCategoria;
 using Infra_BancoDadosORM_J.iary.ModuloTarefa;
 using Infra_BancoDadosORM_J.iary.ModuloUsuario;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ namespace Infra_BancoDadosORM_J.iary.Compartilhado
             modelBuilder.ApplyConfiguration(new MapeadorUsuarioORM());
             modelBuilder.ApplyConfiguration(new MapeadorTarefaORM());
             modelBuilder.ApplyConfiguration(new MapeadorCheckBoxTarefa());
+            modelBuilder.ApplyConfiguration(new MapeadorCategoriaORM());
             base.OnModelCreating(modelBuilder);
         }
 
