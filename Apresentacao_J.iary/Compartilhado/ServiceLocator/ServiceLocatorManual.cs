@@ -102,16 +102,16 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             var controladorTarefa = new ControladorTarefa(ucInserir, servicoTarefa, Logged);
             inserir["ControladorTarefa"] = controladorTarefa.Inserir;
 
-            var ucNota = new UCNotas(Logged, this);
+            var repositorioCategoria = new RepositorioCategoriaORM(contextoDadosOrm);
+            var servicoCategoria = new ServicoCategoria(contextoDadosOrm, repositorioCategoria, contextoDadosOrm);
+            var controladorCategoria = new ControladorCategoria(servicoCategoria, Logged);
+            //inserir["ControladorCategoria"] = controladorCategoria.Inserir;
+            controladores["ControladorCategoria"] = controladorCategoria;
+
             var repositorioNota = new RepositorioNotaORM(contextoDadosOrm);
             var servicoNota = new ServicoNota(contextoDadosOrm, repositorioNota);
-            var controladorNota = new ControladorNota(ucInserir, servicoNota, Logged, this);
+            var controladorNota = new ControladorNota(ucInserir, servicoNota, Logged, this, servicoCategoria);
             inserir["ControladorNota"] = controladorNota.Inserir;
-
-            var repositorioCategoria = new RepositorioCategoriaORM();
-            var servicoCategoria = new ServicoCategoria(contextoDadosOrm, repositorioCategoria);
-            var controladorCategoria = new ControladorCategoria(servicoCategoria, Logged);
-            inserir["ControladorCategoria"] = controladorCategoria.Inserir;
         }
 
 
