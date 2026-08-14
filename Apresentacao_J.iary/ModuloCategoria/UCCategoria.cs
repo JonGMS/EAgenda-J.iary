@@ -19,6 +19,7 @@ namespace Apresentacao_J.iary.ModuloCategoria
         private Usuario Logged;
         public UCCategoria(Usuario usuarioLogado)
         {
+          
             Logged = usuarioLogado;
             InitializeComponent();
         }
@@ -44,6 +45,10 @@ namespace Apresentacao_J.iary.ModuloCategoria
                     else if (erro.Message.Contains("COR"))
                     {
                         labelErroCor.Text = erro.Message;
+                    }
+                    else
+                    {
+                        MessageBox.Show(erro.Message);
                     }
 
                 }
