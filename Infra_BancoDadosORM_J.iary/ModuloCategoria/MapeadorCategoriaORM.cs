@@ -15,9 +15,13 @@ namespace Infra_BancoDadosORM_J.iary.ModuloCategoria
         {
             builder.ToTable("TB_CATEGORIA");
             builder.Property(x => x.Nome)
-                .HasColumnName("NOME");
+                .HasColumnName("NOME")
+                .HasColumnType("varchar(100)")
+                .IsRequired();
             builder.Property(x => x.Cor)
-                .HasColumnName("COR");
+                .HasColumnName("COR")
+                .HasColumnType("varchar(20)")
+                .IsRequired();
             builder.Property(x =>  x.UsuarioId)
                 .HasColumnName("ID_USUARIO")
                 .HasColumnType("uniqueidentifier")
