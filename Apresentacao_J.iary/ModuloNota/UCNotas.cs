@@ -1,4 +1,8 @@
-﻿using Dominio_J.iary.ModuloNota;
+﻿using Apresentacao_J.iary.Compartilhado;
+using Apresentacao_J.iary.Compartilhado.ServiceLocator;
+using Apresentacao_J.iary.ModuloCategoria;
+using Dominio_J.iary.ModuloCategoria;
+using Dominio_J.iary.ModuloNota;
 using Dominio_J.iary.ModuloUsuario;
 using FluentResults;
 using System;
@@ -15,13 +19,24 @@ namespace Apresentacao_J.iary.ModuloNota
 {
     public partial class UCNotas : UserControl
     {
+        private ControladorBase controlador;
+        private IServiceLocator ServiceLocator;
         private Usuario Logged;
-        public UCNotas(Usuario usuarioLogado)
+        private Nota nota = new Nota();
+        public UCNotas(Usuario usuarioLogado, IServiceLocator serviceLocator, List<Categoria> ListagemCategoria)
         {
+            
+            ServiceLocator = serviceLocator;
             Logged = usuarioLogado;
             InitializeComponent();
+            PreencherComboBoxCategoria(ListagemCategoria);
+        }
+        public Nota Nota
+        {
+            get => nota; set => nota = value;
         }
         public Func<Nota, Result<Nota>> GravarDados { get; set; }
+        public Func<Categoria, Result<Categoria>> ListarDados { get; set; }
 
         private void buttonArquivo_Click(object sender, EventArgs e)
         {
@@ -86,6 +101,33 @@ namespace Apresentacao_J.iary.ModuloNota
         private void checkedListBoxDiariamente_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonAdicionarCategoria_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                controlador = ServiceLocator.Get<ControladorCategoria>();
+                controlador.Inserir();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Não foi possível abrir a tela de categoria. {ex}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        private void PreencherComboBoxCategoria(List<Categoria> categorias)
+        {
+            try
+            {
+                comboBoxCategoria.DataSource = categorias;
+                comboBoxCategoria.DisplayMember = "Nome";
+                comboBoxCategoria.ValueMember = "Id";
+            }
+            catch (Exception ex)
+            {
+                labelMensagemErroCategoria.Text = "Nenhuma categoria cadastrada!";
+            }
         }
     }
 }

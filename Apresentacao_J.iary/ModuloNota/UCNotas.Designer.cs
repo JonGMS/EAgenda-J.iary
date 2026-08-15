@@ -42,12 +42,14 @@
             label3 = new Label();
             labelTarefa = new Label();
             comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
+            comboBoxCategoria = new ComboBox();
             label4 = new Label();
             labelPersonalizar = new Label();
             buttonFinalizar = new Button();
             comboBoxArmazenamento = new ComboBox();
             labelArmazenamento = new Label();
+            buttonAdicionarCategoria = new Button();
+            labelMensagemErroCategoria = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAnexos).BeginInit();
             SuspendLayout();
             // 
@@ -190,14 +192,14 @@
             comboBox1.Size = new Size(431, 36);
             comboBox1.TabIndex = 35;
             // 
-            // comboBox2
+            // comboBoxCategoria
             // 
-            comboBox2.Font = new Font("Segoe UI", 12F);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(133, 462);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(431, 36);
-            comboBox2.TabIndex = 38;
+            comboBoxCategoria.Font = new Font("Segoe UI", 12F);
+            comboBoxCategoria.FormattingEnabled = true;
+            comboBoxCategoria.Location = new Point(133, 462);
+            comboBoxCategoria.Name = "comboBoxCategoria";
+            comboBoxCategoria.Size = new Size(372, 36);
+            comboBoxCategoria.TabIndex = 38;
             // 
             // label4
             // 
@@ -214,9 +216,9 @@
             labelPersonalizar.Font = new Font("Copperplate Gothic Light", 12F);
             labelPersonalizar.Location = new Point(133, 439);
             labelPersonalizar.Name = "labelPersonalizar";
-            labelPersonalizar.Size = new Size(207, 21);
+            labelPersonalizar.Size = new Size(127, 21);
             labelPersonalizar.TabIndex = 36;
-            labelPersonalizar.Text = "Personalizar cor:";
+            labelPersonalizar.Text = "Categoria:";
             // 
             // buttonFinalizar
             // 
@@ -253,14 +255,39 @@
             labelArmazenamento.TabIndex = 39;
             labelArmazenamento.Text = "Armazenamento:";
             // 
+            // buttonAdicionarCategoria
+            // 
+            buttonAdicionarCategoria.BackColor = Color.DimGray;
+            buttonAdicionarCategoria.FlatAppearance.BorderSize = 0;
+            buttonAdicionarCategoria.Font = new Font("Copperplate Gothic Light", 12F);
+            buttonAdicionarCategoria.ForeColor = Color.White;
+            buttonAdicionarCategoria.Location = new Point(511, 462);
+            buttonAdicionarCategoria.Name = "buttonAdicionarCategoria";
+            buttonAdicionarCategoria.Size = new Size(53, 36);
+            buttonAdicionarCategoria.TabIndex = 42;
+            buttonAdicionarCategoria.Text = "+";
+            buttonAdicionarCategoria.UseVisualStyleBackColor = false;
+            buttonAdicionarCategoria.Click += buttonAdicionarCategoria_Click;
+            // 
+            // labelMensagemErroCategoria
+            // 
+            labelMensagemErroCategoria.AutoSize = true;
+            labelMensagemErroCategoria.ForeColor = Color.Red;
+            labelMensagemErroCategoria.Location = new Point(256, 439);
+            labelMensagemErroCategoria.Name = "labelMensagemErroCategoria";
+            labelMensagemErroCategoria.Size = new Size(0, 20);
+            labelMensagemErroCategoria.TabIndex = 43;
+            // 
             // UCNotas
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(labelMensagemErroCategoria);
+            Controls.Add(buttonAdicionarCategoria);
             Controls.Add(buttonFinalizar);
             Controls.Add(comboBoxArmazenamento);
             Controls.Add(labelArmazenamento);
-            Controls.Add(comboBox2);
+            Controls.Add(comboBoxCategoria);
             Controls.Add(label4);
             Controls.Add(labelPersonalizar);
             Controls.Add(comboBox1);
@@ -300,11 +327,13 @@
         private Label label3;
         private Label labelTarefa;
         private ComboBox comboBox1;
-        private ComboBox comboBox2;
+        private ComboBox comboBoxCategoria;
         private Label label4;
         private Label labelPersonalizar;
         private Button buttonFinalizar;
         public ComboBox comboBoxArmazenamento;
         private Label labelArmazenamento;
+        private Button buttonAdicionarCategoria;
+        private Label labelMensagemErroCategoria;
     }
 }
