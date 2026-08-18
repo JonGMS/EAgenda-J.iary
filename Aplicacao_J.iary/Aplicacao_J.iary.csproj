@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dominio_J.iary\Dominio_J.iary.csproj" />
+    <ProjectReference Include="..\Infra_BancoDadosORM_J.iary\Infra_BancoDadosORM_J.iary.csproj" />
   </ItemGroup>
 
 </Project>

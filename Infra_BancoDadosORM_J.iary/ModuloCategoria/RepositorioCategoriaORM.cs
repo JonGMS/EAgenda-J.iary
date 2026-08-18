@@ -45,11 +45,13 @@ namespace Infra_BancoDadosORM_J.iary.ModuloCategoria
             throw new NotImplementedException();
         }
 
+
         public List<Categoria> SelecionarTodos(Usuario usuario)
         {
             return categorias
     .Where(x => x.UsuarioId == usuario.Id)
     .ToList();
+
         }
     }
 }

@@ -50,5 +50,10 @@ namespace Infra_BancoDadosORM_J.iary.ModuloTarefa
         {
             return Tarefa.FirstOrDefault(x => x.Titulo == titulo);
         }
+
+        public List<Tarefa> SelecionarTodos(Usuario logado)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

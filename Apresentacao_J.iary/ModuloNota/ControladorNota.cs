@@ -38,16 +38,15 @@ namespace Apresentacao_J.iary.ModuloNota
             nota.Dock = DockStyle.Fill;
             UCInserir.panelFormulario.Controls.Add(nota);
         }
-
         public List<Categoria> ObterCategorias()
         {
-            var resultadoListagem = ServicoCategoria.SelecionarTodos(Logged);
-            List<Categoria> categorias = new List<Categoria>();
+            var resultadoListagem =
+                ServicoCategoria.SelecionarTodos(Logged);
+
             if (resultadoListagem.IsSuccess)
-                categorias = resultadoListagem.Value;
+                return resultadoListagem.Value;
 
-            return categorias;
-
+            return new List<Categoria>();
         }
     }
 }

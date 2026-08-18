@@ -1,3 +1,4 @@
+
 ﻿using Apresentacao_J.iary.Compartilhado;
 using Apresentacao_J.iary.Compartilhado.ServiceLocator;
 using Apresentacao_J.iary.ModuloCategoria;
@@ -24,6 +25,7 @@ namespace Apresentacao_J.iary.ModuloNota
         private Usuario Logged;
         private Nota nota = new Nota();
         public UCNotas(Usuario usuarioLogado, IServiceLocator serviceLocator, List<Categoria> ListagemCategoria)
+
         {
             
             ServiceLocator = serviceLocator;
@@ -97,7 +99,14 @@ namespace Apresentacao_J.iary.ModuloNota
             dataGridViewAnexos.AllowUserToResizeRows = false;
 
         }
+        public void ObterCategorias(List<Categoria> categorias)
+        {
+            comboBoxCategoria.DataSource = null;
 
+            comboBoxCategoria.DisplayMember = nameof(Categoria.Nome);
+            comboBoxCategoria.ValueMember = nameof(Categoria.Id);
+            comboBoxCategoria.DataSource = categorias;
+        }
         private void checkedListBoxDiariamente_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -129,5 +138,6 @@ namespace Apresentacao_J.iary.ModuloNota
                 labelMensagemErroCategoria.Text = "Nenhuma categoria cadastrada!";
             }
         }
+
     }
 }

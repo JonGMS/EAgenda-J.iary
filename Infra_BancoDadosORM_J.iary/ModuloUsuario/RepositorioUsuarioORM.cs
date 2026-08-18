@@ -46,5 +46,10 @@ namespace Infra_BancoDadosORM_J.iary.ModuloUsuario
         {
             throw new NotImplementedException();
         }
+
+        public List<Usuario> SelecionarTodos(Usuario logado)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

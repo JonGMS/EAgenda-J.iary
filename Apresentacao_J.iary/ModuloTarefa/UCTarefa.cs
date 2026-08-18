@@ -48,7 +48,7 @@ namespace Apresentacao_J.iary.ModuloTarefa
             tarefa.CheckBoxes = CheckBoxes;
             tarefa.Armazenamento = comboBoxArmazenamento.SelectedItem.ToString()[0];
 
-            MessageBox.Show($"Prioridade: {tarefa.Prioridade}. \nStatus: {tarefa.Status}\n Armazenamento: {tarefa.Armazenamento}");
+            //MessageBox.Show($"Prioridade: {tarefa.Prioridade}. \nStatus: {tarefa.Status}\n Armazenamento: {tarefa.Armazenamento}");
         }
 
         private void ObterDadosGrid()

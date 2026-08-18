@@ -95,23 +95,31 @@ namespace Aplicacao_J.iary.ModuloCategoria
                 return Result.Fail(ex.Message);
             }
         }
-        public Result<List<Categoria>> SelecionarTodos(Usuario logado) 
+        public Result<List<Categoria>> SelecionarTodos(Usuario logado)
         {
             try
             {
-                List<Categoria> categorias = new List<Categoria>();
-
-                categorias = RepositorioCategoria.SelecionarTodos(logado);
+                List<Categoria> categorias =
+                    RepositorioCategoria.SelecionarTodos(logado);
 
                 return Result.Ok(categorias);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return Result.Fail("Falha ao listar categorias" + ex);
+                return Result.Fail("Falha ao listar categorias: " + ex.Message);
             }
-            
-        
         }
 
+        public List<Categoria> ObterCategorias(Usuario logado)
+        {
+            try
+            {
+                return RepositorioCategoria.SelecionarTodos(logado);
+            }
+            catch
+            {
+                return new List<Categoria>();
+            }
+        }
     }
 }
