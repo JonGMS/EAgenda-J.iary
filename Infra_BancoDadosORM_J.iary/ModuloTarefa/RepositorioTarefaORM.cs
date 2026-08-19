@@ -1,4 +1,5 @@
-﻿using Dominio_J.iary.ModuloLogin;
+﻿using Dominio_J.iary.ModuloCategoria;
+using Dominio_J.iary.ModuloLogin;
 using Dominio_J.iary.ModuloTarefa;
 using Dominio_J.iary.ModuloUsuario;
 using Infra_BancoDadosORM_J.iary.Compartilhado;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Infra_BancoDadosORM_J.iary.ModuloTarefa
 {
+    //Nenhuma Tarefa Cadastrada (Campo opcional)
     public class RepositorioTarefaORM : IRepositorioTarefa
     {
         private DbContext dbContext;
@@ -53,7 +55,9 @@ namespace Infra_BancoDadosORM_J.iary.ModuloTarefa
 
         public List<Tarefa> SelecionarTodos(Usuario logado)
         {
-            throw new NotImplementedException();
+            return Tarefa
+            .Where(x => x.IDUsuario == logado.Id)
+            .ToList();
         }
     }
 }

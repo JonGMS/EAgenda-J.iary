@@ -49,5 +49,10 @@ namespace Infra_BancoDadosORM_J.iary.ModuloNota
         {
             throw new NotImplementedException();
         }
+
+        public Nota SelecionarNotaPorTitulo(Nota registro, Usuario logado)
+        {
+            return notas.Where(x => x.UsuarioId == logado.Id).FirstOrDefault(x => x.Titulo == registro.Titulo);
+        }
     }
 }
