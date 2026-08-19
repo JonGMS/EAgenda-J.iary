@@ -93,7 +93,8 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
         {
             var ucInserir = new UCInserir(this);
             this.ucInserir = ucInserir;
-            controladores["ControladorInserir"] = new ControladorInserir(telaInicial, this, ucInserir);
+            controladores["ControladorInserir"] =
+                new ControladorInserir(telaInicial, this, ucInserir);
 
             var ucTarefa = new UCTarefa(Logged);
             var repositorioTarefa = new RepositorioTarefaORM(contextoDadosOrm);
@@ -101,37 +102,17 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             var controladorTarefa = new ControladorTarefa(ucInserir, servicoTarefa, Logged);
             inserir["ControladorTarefa"] = controladorTarefa.Inserir;
 
-
-
             var repositorioCategoria = new RepositorioCategoriaORM(contextoDadosOrm);
-
             var servicoCategoria = new ServicoCategoria(contextoDadosOrm, repositorioCategoria, contextoDadosOrm);
-
             var controladorCategoria = new ControladorCategoria(servicoCategoria, Logged);
-
-            inserir["ControladorCategoria"] =
-                controladorCategoria.Inserir;
-
-            controladores["ControladorCategoria"] =
-                controladorCategoria;
-
-            var repositorioNota =
-    new RepositorioNotaORM(contextoDadosOrm);
-
-            var servicoNota =
-                new ServicoNota(contextoDadosOrm, repositorioNota);
-
-            var controladorNota =
-                new ControladorNota(
-                    ucInserir,
-                    servicoNota,
-                    Logged,
-                    this,
-                    servicoCategoria
-                );
-
+            inserir["ControladorCategoria"] = controladorCategoria.Inserir;
+            controladores["ControladorCategoria"] = controladorCategoria;
+            var repositorioNota = new RepositorioNotaORM(contextoDadosOrm);
+            var servicoNota = new ServicoNota(contextoDadosOrm, repositorioNota);
+            var controladorNota = new ControladorNota(ucInserir, servicoNota, Logged, this, servicoCategoria, servicoTarefa);
             inserir["ControladorNota"] = controladorNota.Inserir;
-            controladores["ControladorNota"] = controladorNota;
+
+
         }
 
 
