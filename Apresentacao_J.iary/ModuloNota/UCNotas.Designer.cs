@@ -41,7 +41,7 @@
             dataGridViewAnexos = new DataGridView();
             label3 = new Label();
             labelTarefa = new Label();
-            comboBox1 = new ComboBox();
+            comboBoxTarefa = new ComboBox();
             comboBoxCategoria = new ComboBox();
             label4 = new Label();
             labelPersonalizar = new Label();
@@ -50,6 +50,7 @@
             labelArmazenamento = new Label();
             buttonAdicionarCategoria = new Button();
             labelMensagemErroCategoria = new Label();
+            labelMensagemErroTarefa = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAnexos).BeginInit();
             SuspendLayout();
             // 
@@ -183,14 +184,13 @@
             labelTarefa.TabIndex = 32;
             labelTarefa.Text = "Tarefa:";
             // 
-            // comboBox1
+            // comboBoxTarefa
             // 
-            comboBox1.Font = new Font("Segoe UI", 12F);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(133, 550);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(431, 36);
-            comboBox1.TabIndex = 35;
+            comboBoxTarefa.Font = new Font("Segoe UI", 12F);
+            comboBoxTarefa.Location = new Point(133, 550);
+            comboBoxTarefa.Name = "comboBoxTarefa";
+            comboBoxTarefa.Size = new Size(431, 36);
+            comboBoxTarefa.TabIndex = 35;
             // 
             // comboBoxCategoria
             // 
@@ -214,7 +214,7 @@
             // 
             labelPersonalizar.AutoSize = true;
             labelPersonalizar.Font = new Font("Copperplate Gothic Light", 12F);
-            labelPersonalizar.Location = new Point(133, 439);
+            labelPersonalizar.Location = new Point(133, 438);
             labelPersonalizar.Name = "labelPersonalizar";
             labelPersonalizar.Size = new Size(127, 21);
             labelPersonalizar.TabIndex = 36;
@@ -232,6 +232,7 @@
             buttonFinalizar.TabIndex = 41;
             buttonFinalizar.Text = "Finalizar";
             buttonFinalizar.UseVisualStyleBackColor = false;
+            buttonFinalizar.Click += buttonFinalizar_Click;
             // 
             // comboBoxArmazenamento
             // 
@@ -278,10 +279,20 @@
             labelMensagemErroCategoria.Size = new Size(0, 20);
             labelMensagemErroCategoria.TabIndex = 43;
             // 
+            // labelMensagemErroTarefa
+            // 
+            labelMensagemErroTarefa.AutoSize = true;
+            labelMensagemErroTarefa.ForeColor = Color.DarkGoldenrod;
+            labelMensagemErroTarefa.Location = new Point(217, 528);
+            labelMensagemErroTarefa.Name = "labelMensagemErroTarefa";
+            labelMensagemErroTarefa.Size = new Size(0, 20);
+            labelMensagemErroTarefa.TabIndex = 44;
+            // 
             // UCNotas
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(labelMensagemErroTarefa);
             Controls.Add(labelMensagemErroCategoria);
             Controls.Add(buttonAdicionarCategoria);
             Controls.Add(buttonFinalizar);
@@ -290,7 +301,7 @@
             Controls.Add(comboBoxCategoria);
             Controls.Add(label4);
             Controls.Add(labelPersonalizar);
-            Controls.Add(comboBox1);
+            Controls.Add(comboBoxTarefa);
             Controls.Add(label3);
             Controls.Add(labelTarefa);
             Controls.Add(dataGridViewAnexos);
@@ -326,7 +337,6 @@
         public DataGridView dataGridViewAnexos;
         private Label label3;
         private Label labelTarefa;
-        private ComboBox comboBox1;
         private ComboBox comboBoxCategoria;
         private Label label4;
         private Label labelPersonalizar;
@@ -335,5 +345,7 @@
         private Label labelArmazenamento;
         private Button buttonAdicionarCategoria;
         private Label labelMensagemErroCategoria;
+        public ComboBox comboBoxTarefa;
+        private Label labelMensagemErroTarefa;
     }
 }

@@ -1,9 +1,9 @@
-
 ﻿using Apresentacao_J.iary.Compartilhado;
 using Apresentacao_J.iary.Compartilhado.ServiceLocator;
 using Apresentacao_J.iary.ModuloCategoria;
 using Dominio_J.iary.ModuloCategoria;
 using Dominio_J.iary.ModuloNota;
+using Dominio_J.iary.ModuloTarefa;
 using Dominio_J.iary.ModuloUsuario;
 using FluentResults;
 using System;
@@ -24,21 +24,21 @@ namespace Apresentacao_J.iary.ModuloNota
         private IServiceLocator ServiceLocator;
         private Usuario Logged;
         private Nota nota = new Nota();
-        public UCNotas(Usuario usuarioLogado, IServiceLocator serviceLocator, List<Categoria> ListagemCategoria)
-
+        public UCNotas(Usuario usuarioLogado, IServiceLocator serviceLocator, List<Categoria> listagemCategoria, List<Tarefa> listagemTarefa)
         {
             
             ServiceLocator = serviceLocator;
             Logged = usuarioLogado;
             InitializeComponent();
-            PreencherComboBoxCategoria(ListagemCategoria);
+            PreencherComboBoxCategoria(listagemCategoria);
+            PersonalizarGrid();
+            PreencherComboBoxTarefa(listagemTarefa);
         }
         public Nota Nota
         {
             get => nota; set => nota = value;
         }
-        public Func<Nota, Result<Nota>> GravarDados { get; set; }
-        public Func<Categoria, Result<Categoria>> ListarDados { get; set; }
+        public Func<Nota, Usuario, Result<Nota>> GravarDados { get; set; }
 
         private void buttonArquivo_Click(object sender, EventArgs e)
         {
@@ -70,10 +70,11 @@ namespace Apresentacao_J.iary.ModuloNota
 
         private void UCNotas_Load(object sender, EventArgs e)
         {
-            PersonalizarGrid();
-            //PersonalizarCheck();
+
+
 
         }
+
         private void PersonalizarGrid()
         {
 
@@ -107,37 +108,65 @@ namespace Apresentacao_J.iary.ModuloNota
             comboBoxCategoria.ValueMember = nameof(Categoria.Id);
             comboBoxCategoria.DataSource = categorias;
         }
-        private void checkedListBoxDiariamente_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-
+        public Func<List<Categoria>> AtualizarCategorias { get; set; }
         private void buttonAdicionarCategoria_Click(object sender, EventArgs e)
         {
             try
             {
                 controlador = ServiceLocator.Get<ControladorCategoria>();
                 controlador.Inserir();
+
+                comboBoxCategoria.DataSource = null;
+                PreencherComboBoxCategoria(AtualizarCategorias());
+                
             }
             catch(Exception ex)
             {
                 MessageBox.Show($"Não foi possível abrir a tela de categoria. {ex}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                buttonAdicionarCategoria.Enabled = false;
             }
 
         }
         private void PreencherComboBoxCategoria(List<Categoria> categorias)
         {
-            try
+            if(categorias.Count == 0)
             {
-                comboBoxCategoria.DataSource = categorias;
-                comboBoxCategoria.DisplayMember = "Nome";
-                comboBoxCategoria.ValueMember = "Id";
+                labelMensagemErroCategoria.Text = "Nenhuma categoria cadastrada.";
+
             }
-            catch (Exception ex)
-            {
-                labelMensagemErroCategoria.Text = "Nenhuma categoria cadastrada!";
-            }
+            comboBoxCategoria.DataSource = null;
+            comboBoxCategoria.DisplayMember = nameof(Categoria.Nome);
+            comboBoxCategoria.ValueMember = nameof(Categoria.Id);
+            comboBoxCategoria.DataSource = categorias;
+
+            comboBoxCategoria.SelectedIndex = -1;
         }
 
+        private void PreencherComboBoxTarefa(List<Tarefa> tarefas)
+        {
+            if(tarefas.Count == 0)
+            {
+                labelMensagemErroTarefa.Text = "Nenhuma tarefa cadastrada. (campo opcional)";
+                comboBoxTarefa.Enabled = false;
+            }
+            comboBoxTarefa.DataSource = null;
+            comboBoxTarefa.DisplayMember = nameof(Tarefa.Titulo);
+            comboBoxTarefa.ValueMember = nameof(Tarefa.Id);
+            comboBoxTarefa.DataSource = tarefas;
+
+            comboBoxTarefa.SelectedIndex = -1;
+        }
+        private void buttonFinalizar_Click(object sender, EventArgs e)
+        {
+            // Código para finalizar/salvar a nota
+        }
+        private void PersonalizarComboBox()
+        {
+            comboBoxArmazenamento.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxTarefa.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxArmazenamento.SelectedIndex = 0;
+        }
     }
 }
