@@ -1,4 +1,5 @@
 ﻿using Dominio_J.iary.Compartilhado;
+using Dominio_J.iary.ModuloUsuario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,6 @@ namespace Dominio_J.iary.Compartilhado
 
         T SelecionarPorId(Guid id);
 
-        List<T> SelecionarTodos();
+        List<T> SelecionarTodos(Usuario logado);
     }
 }

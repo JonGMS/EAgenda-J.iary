@@ -35,7 +35,7 @@ namespace Apresentacao_J.iary.ModuloCategoria
 
             categoria.Controls.Add(ucCategoria);
 
-            categoria.Show();
+            categoria.ShowDialog();
         }
     }
 }

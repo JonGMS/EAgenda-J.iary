@@ -41,7 +41,7 @@ namespace Apresentacao_J.iary.ModuloInserir
 
         }
 
-        private ControladorBase ObterControlador(ControladorBase controladorbase)
+        private ControladorBase ObterControladores(ControladorBase controladorbase)
         {
             return this.controlador = controladorbase;
         }
