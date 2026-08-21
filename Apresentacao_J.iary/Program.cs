@@ -32,11 +32,10 @@ namespace Apresentacao_J.iary
                     FormBorderStyle = FormBorderStyle.FixedDialog
                 };
 
-                var ucTelaInicial = new UCTelaInicial(serviceLocator)
+                var ucTelaInicial = new UCTelaInicial(serviceLocator, serviceLocator.ApresentarUsuario())
                     {
                         Dock = DockStyle.Fill
                     };
-
                 serviceLocator.RegistrarTelaInicial(ucTelaInicial);
 
                 form.Controls.Add(ucTelaInicial);
