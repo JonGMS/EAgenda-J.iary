@@ -32,7 +32,7 @@
             textBoxTitulo = new TextBox();
             labelTitulo = new Label();
             label1 = new Label();
-            textBox1 = new TextBox();
+            textBoxDescricao = new TextBox();
             labelDescricao = new Label();
             openFileDialogNotas = new OpenFileDialog();
             label2 = new Label();
@@ -92,16 +92,16 @@
             label1.Size = new Size(0, 20);
             label1.TabIndex = 26;
             // 
-            // textBox1
+            // textBoxDescricao
             // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.CharacterCasing = CharacterCasing.Upper;
-            textBox1.Font = new Font("Segoe UI", 12F);
-            textBox1.Location = new Point(133, 196);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(431, 206);
-            textBox1.TabIndex = 25;
+            textBoxDescricao.BorderStyle = BorderStyle.FixedSingle;
+            textBoxDescricao.CharacterCasing = CharacterCasing.Upper;
+            textBoxDescricao.Font = new Font("Segoe UI", 12F);
+            textBoxDescricao.Location = new Point(133, 196);
+            textBoxDescricao.Multiline = true;
+            textBoxDescricao.Name = "textBoxDescricao";
+            textBoxDescricao.Size = new Size(431, 206);
+            textBoxDescricao.TabIndex = 25;
             // 
             // labelDescricao
             // 
@@ -309,7 +309,7 @@
             Controls.Add(labelAnexo);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxDescricao);
             Controls.Add(labelDescricao);
             Controls.Add(labelErroTitulo);
             Controls.Add(textBoxTitulo);
@@ -328,7 +328,7 @@
         public TextBox textBoxTitulo;
         private Label labelTitulo;
         private Label label1;
-        public TextBox textBox1;
+        public TextBox textBoxDescricao;
         private Label labelDescricao;
         private OpenFileDialog openFileDialogNotas;
         private Label label2;
