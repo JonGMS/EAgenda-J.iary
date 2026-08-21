@@ -33,6 +33,7 @@ namespace Apresentacao_J.iary.ModuloNota
             PreencherComboBoxCategoria(listagemCategoria);
             PersonalizarGrid();
             PreencherComboBoxTarefa(listagemTarefa);
+            PersonalizarComboBox();
         }
         public Nota Nota
         {
@@ -40,30 +41,45 @@ namespace Apresentacao_J.iary.ModuloNota
         }
         public Func<Nota, Usuario, Result<Nota>> GravarDados { get; set; }
 
+        private List<Anexo> anexos = new List<Anexo>();
         private void buttonArquivo_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Selecione um arquivo";
             dialog.Filter = "Todos os arquivos (*.*)|*.*";
+            
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 foreach (string arquivo in dialog.FileNames)
                 {
-                    Image miniatura = null;
-
-                    string extensao = Path.GetExtension(arquivo).ToLower();
-
-                    if (extensao == ".png" ||
-                        extensao == ".jpg" ||
-                        extensao == ".jpeg" ||
-                        extensao == ".bmp")
+                    try
                     {
-                        miniatura = Image.FromFile(arquivo);
+                        Image miniatura = null;
+                        string extensao = Path.GetExtension(arquivo).ToLower();
+
+                        if (extensao == ".png" || extensao == ".jpg" || extensao == ".jpeg" || extensao == ".bmp")
+                        {
+                            miniatura = Image.FromFile(arquivo);
+                        }
+                        dataGridViewAnexos.Rows.Add(miniatura, Path.GetFileName(arquivo));
+
+                        byte[] conteudoArquivo = File.ReadAllBytes(arquivo);
+
+                        Anexo anexo = new Anexo
+                        {
+                            NomeArquivo = Path.GetFileName(arquivo),
+                            Tipo = extensao,
+                            Arquivo = conteudoArquivo
+                        };
+                        anexos.Add(anexo);
                     }
-                    dataGridViewAnexos.Rows.Add(
-                miniatura,
-                Path.GetFileName(arquivo)
-            );
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show($"Não foi possível anexar o arquivo.\n{ex.Message}", "Erro",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    }
+
                 }
             }
         }
@@ -159,8 +175,50 @@ namespace Apresentacao_J.iary.ModuloNota
         }
         private void buttonFinalizar_Click(object sender, EventArgs e)
         {
-            // Código para finalizar/salvar a nota
+            try
+            {
+                ObterDados();
+                var resultadoGravacao = GravarDados(nota, Logged);
+
+                if (resultadoGravacao.IsFailed)
+                {
+                    MessageBox.Show($"Não foi possível gravar os dados da nota.\n" +
+                        $"{resultadoGravacao.Errors[0].Message}", "Erro",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                else
+                {
+                    ApagarCampos();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Nota não cadastrada");
+            }
         }
+
+        private void ApagarCampos()
+        {
+            textBoxTitulo.Clear();
+            textBoxDescricao.Clear();
+            dataGridViewAnexos.Rows.Clear();
+            anexos.Clear();
+        }
+
+        private void ObterDados()
+        {
+            nota.Titulo = textBoxTitulo.Text;
+            nota.Descricao = textBoxDescricao.Text;
+            nota.Categoria = comboBoxCategoria.SelectedItem as Categoria;
+            nota.Tarefa = comboBoxTarefa.SelectedItem as Tarefa;
+
+            nota.UsuarioId = Logged.Id;
+
+            nota.Arquivos = anexos;
+            nota.Armazenamento = comboBoxArmazenamento.SelectedItem.ToString()[0];
+        }
+
         private void PersonalizarComboBox()
         {
             comboBoxArmazenamento.DropDownStyle = ComboBoxStyle.DropDownList;

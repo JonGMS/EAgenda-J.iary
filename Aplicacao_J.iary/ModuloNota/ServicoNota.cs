@@ -29,7 +29,11 @@ namespace Aplicacao_J.iary.ModuloNota
             try
             {
                 var resultadoValidacao = ValidarNota(nota, logado);
-                //Validacao
+
+                if (resultadoValidacao.IsFailed)
+                {
+                    return Result.Fail(resultadoValidacao.Errors);
+                }
 
                 RepositorioNotaORM.Inserir(nota);
                 ContextoPersistencia.GravarDados();

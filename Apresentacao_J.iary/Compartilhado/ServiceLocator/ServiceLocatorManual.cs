@@ -129,5 +129,10 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             else if (nomeControlador == "ControladorCategoria")
                 inserir["ControladorCategoria"]();
         }
+
+        public Usuario ApresentarUsuario()
+        {
+            return Logged;
+        }
     }
 }
