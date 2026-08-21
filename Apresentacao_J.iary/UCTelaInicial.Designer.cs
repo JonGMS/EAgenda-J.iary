@@ -30,7 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCTelaInicial));
             panelMenu = new Panel();
-            pictureBox1 = new PictureBox();
+            pictureBoxCombo = new PictureBox();
+            labelUsuarioLogado = new Label();
+            pictureBoxUsuarioIcon = new PictureBox();
             labelTool = new Label();
             pictureBoxLogo = new PictureBox();
             panelContent = new Panel();
@@ -39,30 +41,58 @@
             buttonCofre = new Button();
             buttonDiario = new Button();
             panelFooter = new Panel();
+            panelComboPerfil = new Panel();
+            panelSubMenu = new Panel();
             panelMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxCombo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxUsuarioIcon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
+            panelComboPerfil.SuspendLayout();
             SuspendLayout();
             // 
             // panelMenu
             // 
             panelMenu.BackColor = Color.White;
             panelMenu.BorderStyle = BorderStyle.Fixed3D;
-            panelMenu.Controls.Add(pictureBox1);
+            panelMenu.Controls.Add(panelSubMenu);
+            panelMenu.Controls.Add(labelUsuarioLogado);
+            panelMenu.Controls.Add(pictureBoxUsuarioIcon);
             panelMenu.Controls.Add(labelTool);
             panelMenu.Controls.Add(pictureBoxLogo);
+            panelMenu.Controls.Add(panelComboPerfil);
             panelMenu.Location = new Point(-1, -1);
             panelMenu.Name = "panelMenu";
             panelMenu.Size = new Size(1922, 115);
             panelMenu.TabIndex = 0;
             // 
-            // pictureBox1
+            // pictureBoxCombo
             // 
-            pictureBox1.Location = new Point(1846, 32);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(56, 50);
-            pictureBox1.TabIndex = 2;
-            pictureBox1.TabStop = false;
+            pictureBoxCombo.Image = (Image)resources.GetObject("pictureBoxCombo.Image");
+            pictureBoxCombo.Location = new Point(5, 30);
+            pictureBoxCombo.Name = "pictureBoxCombo";
+            pictureBoxCombo.Size = new Size(25, 15);
+            pictureBoxCombo.TabIndex = 4;
+            pictureBoxCombo.TabStop = false;
+            // 
+            // labelUsuarioLogado
+            // 
+            labelUsuarioLogado.AutoSize = true;
+            labelUsuarioLogado.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            labelUsuarioLogado.Location = new Point(1766, 42);
+            labelUsuarioLogado.Name = "labelUsuarioLogado";
+            labelUsuarioLogado.Size = new Size(0, 21);
+            labelUsuarioLogado.TabIndex = 3;
+            labelUsuarioLogado.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // pictureBoxUsuarioIcon
+            // 
+            pictureBoxUsuarioIcon.Image = (Image)resources.GetObject("pictureBoxUsuarioIcon.Image");
+            pictureBoxUsuarioIcon.Location = new Point(1803, 23);
+            pictureBoxUsuarioIcon.Name = "pictureBoxUsuarioIcon";
+            pictureBoxUsuarioIcon.Size = new Size(50, 50);
+            pictureBoxUsuarioIcon.TabIndex = 2;
+            pictureBoxUsuarioIcon.TabStop = false;
+            pictureBoxUsuarioIcon.Click += pictureBox1_Click;
             // 
             // labelTool
             // 
@@ -165,6 +195,23 @@
             panelFooter.Size = new Size(1597, 54);
             panelFooter.TabIndex = 5;
             // 
+            // panelComboPerfil
+            // 
+            panelComboPerfil.Controls.Add(pictureBoxCombo);
+            panelComboPerfil.Location = new Point(1767, 23);
+            panelComboPerfil.Name = "panelComboPerfil";
+            panelComboPerfil.Size = new Size(88, 50);
+            panelComboPerfil.TabIndex = 5;
+            panelComboPerfil.Click += panelComboPerfil_Click;
+            // 
+            // panelSubMenu
+            // 
+            panelSubMenu.Location = new Point(1632, 74);
+            panelSubMenu.Name = "panelSubMenu";
+            panelSubMenu.Size = new Size(245, 100);
+            panelSubMenu.TabIndex = 6;
+            panelSubMenu.Visible = false;
+            // 
             // UCTelaInicial
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -183,8 +230,10 @@
             Size = new Size(1924, 1083);
             panelMenu.ResumeLayout(false);
             panelMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxCombo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxUsuarioIcon).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
+            panelComboPerfil.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -195,9 +244,13 @@
         private Button buttonDiario;
         private Panel panelFooter;
         private Label labelTool;
-        private PictureBox pictureBox1;
+        private PictureBox pictureBoxUsuarioIcon;
         public Button buttonInserir;
         public Panel panelContent;
         public Panel panelMenu;
+        private Label labelUsuarioLogado;
+        private PictureBox pictureBoxCombo;
+        private Panel panelComboPerfil;
+        private Panel panelSubMenu;
     }
 }
