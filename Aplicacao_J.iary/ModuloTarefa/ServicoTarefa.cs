@@ -1,4 +1,5 @@
 ﻿using Dominio_J.iary.Compartilhado;
+using Dominio_J.iary.ModuloRotina;
 using Dominio_J.iary.ModuloTarefa;
 using Dominio_J.iary.ModuloUsuario;
 using FluentResults;
@@ -13,14 +14,16 @@ namespace Aplicacao_J.iary.ModuloTarefa
 {
     public class ServicoTarefa
     {
+        private IRepositorioRotina RepositorioRotina;
         private IRepositorioTarefa RepositorioTarefa;
         private readonly IContextoPersistencia ContextoPersistencia;
-        public ServicoTarefa(IRepositorioTarefa repositorio, IContextoPersistencia contextoPersistencia)
+        public ServicoTarefa(IRepositorioTarefa repositorio, IContextoPersistencia contextoPersistencia, IRepositorioRotina repositorioRotina)
         {
             RepositorioTarefa = repositorio;
             ContextoPersistencia = contextoPersistencia;
+            RepositorioRotina = repositorioRotina;
         }
-        public Result<Tarefa> Inserir(Tarefa tarefa)
+        public Result<Tarefa> Inserir(Tarefa tarefa, List <Rotina> rotinas)
         {
             try
             {
@@ -29,6 +32,22 @@ namespace Aplicacao_J.iary.ModuloTarefa
                     return validador;
 
                 RepositorioTarefa.Inserir(tarefa);
+
+                foreach (var rotina in rotinas)
+                {
+                    foreach (string dia in rotina.Dias)
+                    {
+                        DiaRotina registro = new DiaRotina
+                        {
+                            UsuarioID = rotina.UsuarioID,
+                            TarefaID = tarefa.Id,
+                            Dia = dia
+                        };
+
+                        RepositorioRotina.Inserir(registro);
+                    }
+                }
+
                 ContextoPersistencia.GravarDados();
 
                 return Result.Ok(tarefa);
