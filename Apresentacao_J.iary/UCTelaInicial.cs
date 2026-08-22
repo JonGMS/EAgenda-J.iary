@@ -1,5 +1,6 @@
 ﻿using Apresentacao_J.iary.Compartilhado;
 using Apresentacao_J.iary.Compartilhado.ServiceLocator;
+using Apresentacao_J.iary.ModuloDashboard;
 using Apresentacao_J.iary.ModuloInserir;
 using Apresentacao_J.iary.ModuloPerfil;
 using Apresentacao_J.iary.ModuloUsuario;
@@ -28,6 +29,9 @@ namespace Apresentacao_J.iary
             InitializeComponent();
             logado = usuarioLogado;
             PersoalizarUsuario();
+            pictureBoxUsuarioIcon.Enabled = false;
+            pictureBoxCombo.Enabled = false;
+            panelContent.Controls.Add(new UCDashboard());
         }
 
         private void buttonInserir_Click(object sender, EventArgs e)
@@ -53,11 +57,52 @@ namespace Apresentacao_J.iary
             labelUsuarioLogado.Left = direita - labelUsuarioLogado.Width;
         }
 
+        private UCSubMenuPerfil ucPerfil;
+
         private void panelComboPerfil_Click(object sender, EventArgs e)
         {
-            controlador = serviceLocator.Get<ControladorUsuario>();
 
-            controlador.Inserir();
+            if (ucPerfil == null || ucPerfil.IsDisposed)
+            {
+                ucPerfil = new UCSubMenuPerfil(this);
+                ucPerfil.Location = new Point(1620, 80);
+                this.Controls.Add(ucPerfil);
+                ucPerfil.BringToFront();
+            }
+
+            ucPerfil.Visible = true;
+
+        }
+
+        private void UCTelaInicial_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (ucPerfil != null && ucPerfil.Visible)
+            {
+                if (!ucPerfil.Bounds.Contains(e.Location))
+                {
+                    ucPerfil.Visible = false;
+                    this.MouseDown -= UCTelaInicial_MouseDown;
+                }
+            }
+        }
+
+        private void panelContent_MouseHover(object sender, EventArgs e)
+        {
+            if (ucPerfil != null && ucPerfil.Visible)
+            {
+                if (ucPerfil.Visible == true)
+                {
+                    ucPerfil.Visible = false;
+                    this.MouseDown -= UCTelaInicial_MouseDown;
+                }
+            }
+        }
+
+        private void pictureBoxLogo_Click(object sender, EventArgs e)
+        {
+            UCDashboard dashboard = new UCDashboard();
+            panelContent.Controls.Clear();
+            panelContent.Controls.Add(dashboard);
         }
     }
 }
