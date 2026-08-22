@@ -17,6 +17,9 @@ namespace Dominio_J.iary.ModuloTarefa
         public char Prioridade { get; set; }
         public char Status { get; set; }
         public string Descricao { get; set; }
+        public List<string> Rotina { get; set; } // Atualizar
+        public DateTime DataMarcada { get; set; }
+
         public List<ValoresCheckBox> CheckBoxes { get; set; }
         public char Armazenamento { get; set; }
         public DateTime DataCriacao { get; set; } = DateTime.Now;
@@ -28,7 +31,7 @@ namespace Dominio_J.iary.ModuloTarefa
         {
             IDUsuario = usuario.Id ;
         }
-        public Tarefa( string titulo, char prioridade, char status, string descricao, List<ValoresCheckBox> check, char armazenamento)
+        public Tarefa( string titulo, char prioridade, char status, string descricao, List<ValoresCheckBox> check, char armazenamento, List<string> dias, DateTime dataMarcada)
         {
             
             Titulo = titulo;
@@ -37,6 +40,9 @@ namespace Dominio_J.iary.ModuloTarefa
             Descricao = descricao;
             CheckBoxes = check;
             Armazenamento = armazenamento;
+            DataMarcada = dataMarcada;
+            Rotina = dias;
+
         }
 
         private Guid ObterUsuario(Usuario usuario)
