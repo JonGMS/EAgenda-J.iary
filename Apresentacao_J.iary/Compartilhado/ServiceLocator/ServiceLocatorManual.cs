@@ -22,6 +22,7 @@ using Aplicacao_J.iary.ModuloNota;
 using Aplicacao_J.iary.ModuloCategoria;
 using Apresentacao_J.iary.ModuloCategoria;
 using Infra_BancoDadosORM_J.iary.ModuloCategoria;
+using Infra_BancoDadosORM_J.iary.ModuloRotina;
 
 namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
 {
@@ -96,9 +97,11 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             controladores["ControladorInserir"] =
                 new ControladorInserir(telaInicial, this, ucInserir);
 
+            var repositorioRotina = new RepositorioRotinaORM(contextoDadosOrm);
+
             var ucTarefa = new UCTarefa(Logged);
             var repositorioTarefa = new RepositorioTarefaORM(contextoDadosOrm);
-            var servicoTarefa = new ServicoTarefa(repositorioTarefa, contextoDadosOrm);
+            var servicoTarefa = new ServicoTarefa(repositorioTarefa, contextoDadosOrm, repositorioRotina);
             var controladorTarefa = new ControladorTarefa(ucInserir, servicoTarefa, Logged);
             inserir["ControladorTarefa"] = controladorTarefa.Inserir;
 
