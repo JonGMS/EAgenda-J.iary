@@ -60,7 +60,7 @@ namespace Apresentacao_J.iary.ModuloNota
         }
         public List<Tarefa> ObterTarefa()
         {
-            var resultadoListagem = ServicoTarefa.SelecioarTodos(Logged);
+            var resultadoListagem = ServicoTarefa.SelecionarTodos(Logged);
             if(resultadoListagem.IsSuccess)
                 return resultadoListagem.Value;
 
