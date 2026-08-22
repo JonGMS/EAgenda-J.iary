@@ -1,4 +1,5 @@
 ﻿using Dominio_J.iary.Compartilhado;
+using Dominio_J.iary.ModuloRotina;
 using Dominio_J.iary.ModuloUsuario;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ namespace Dominio_J.iary.ModuloTarefa
         public char Prioridade { get; set; }
         public char Status { get; set; }
         public string Descricao { get; set; }
-        public List<string> Rotina { get; set; } // Atualizar
-        public DateTime DataMarcada { get; set; }
+        public List<Rotina>? Rotina { get; set; } // Atualizar
+        public DateTime? DataMarcada { get; set; }
 
         public List<ValoresCheckBox> CheckBoxes { get; set; }
         public char Armazenamento { get; set; }
@@ -31,7 +32,7 @@ namespace Dominio_J.iary.ModuloTarefa
         {
             IDUsuario = usuario.Id ;
         }
-        public Tarefa( string titulo, char prioridade, char status, string descricao, List<ValoresCheckBox> check, char armazenamento, List<string> dias, DateTime dataMarcada)
+        public Tarefa( string titulo, char prioridade, char status, string descricao, List<ValoresCheckBox> check, char armazenamento, List<Rotina> dias, DateTime dataMarcada)
         {
             
             Titulo = titulo;

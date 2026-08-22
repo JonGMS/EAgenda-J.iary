@@ -1,5 +1,6 @@
 ﻿using Apresentacao_J.iary.Compartilhado;
 using Apresentacao_J.iary.Compartilhado.ServiceLocator;
+using Dominio_J.iary.ModuloRotina;
 using Dominio_J.iary.ModuloTarefa;
 using Dominio_J.iary.ModuloUsuario;
 using FluentResults;
@@ -19,6 +20,7 @@ namespace Apresentacao_J.iary.ModuloTarefa
     public partial class UCTarefa : UserControl
     {
         private List<ValoresCheckBox> CheckBoxes = new List<ValoresCheckBox>();
+        private List<Rotina> rotinas = new List<Rotina>();
         private Usuario Logged;
         private Tarefa tarefa;
         private string _MensagemErro;
@@ -34,7 +36,7 @@ namespace Apresentacao_J.iary.ModuloTarefa
         {
             get => tarefa; set => tarefa = value;
         }
-        public Func<Tarefa, Result<Tarefa>> GravarDados { get; set; }
+        public Func<Tarefa, List<Rotina>, Result<Tarefa>> GravarDados { get; set; }
 
 
         private void ObterDados()
@@ -45,14 +47,14 @@ namespace Apresentacao_J.iary.ModuloTarefa
             tarefa.Prioridade = comboBoxPrioridade.SelectedItem.ToString()[0];
             tarefa.Status = comboBoxStatus.SelectedItem.ToString()[0];
             if (radioButtonRotina.Checked)
-                tarefa.Rotina = ObterDadosRotina();
+                rotinas = ObterDadosRotina();
             else
-                tarefa.Rotina = new List<string>();
+                tarefa.Rotina = new List<Rotina>();
 
             if (radioButtonData.Checked) 
                 tarefa.DataMarcada = dateTimePickerData.Value;
             else
-                tarefa.DataMarcada = DateTime.MinValue;
+                tarefa.DataMarcada = null; ;
 
             ObterDadosGrid();
             tarefa.CheckBoxes = CheckBoxes;
@@ -61,8 +63,9 @@ namespace Apresentacao_J.iary.ModuloTarefa
             //MessageBox.Show($"Prioridade: {tarefa.Prioridade}. \nStatus: {tarefa.Status}\n Armazenamento: {tarefa.Armazenamento}");
         }
 
-        private List<string> ObterDadosRotina()
+        private List<Rotina> ObterDadosRotina()
         {
+            List<Rotina> rotinas = new List<Rotina>();
             List<string> dias = new List<string>();
             dias = checkBoxDomingo.Checked ? dias.Append("DOM").ToList() : dias;
             dias = checkBoxSegunda.Checked ? dias.Append("SEG").ToList() : dias;
@@ -72,7 +75,13 @@ namespace Apresentacao_J.iary.ModuloTarefa
             dias = checkBoxSexta.Checked ? dias.Append("SEX").ToList() : dias;
             dias = checkBoxSabado.Checked ? dias.Append("SAB").ToList() : dias;
 
-            return dias;
+            foreach (var dia in dias)
+            {
+                Rotina rotina = new Rotina(Logged, tarefa, new List<string> { dia });
+                rotinas.Add(rotina);
+            }
+
+            return rotinas;
         }
 
         private void ObterDadosGrid()
@@ -119,7 +128,7 @@ namespace Apresentacao_J.iary.ModuloTarefa
         {
             ObterDados();
 
-            var resultado = GravarDados(tarefa);
+            var resultado = GravarDados(tarefa, rotinas);
             if (resultado.IsFailed)
             {
                 CheckBoxes.Clear();
@@ -133,6 +142,10 @@ namespace Apresentacao_J.iary.ModuloTarefa
                     else if (erro.Message.Contains("DESCRIÇÃO"))
                     {
                         labelErroDescricao.Text = erro.Message;
+                    }
+                    else
+                    {
+                        MessageBox.Show(erro.Message);
                     }
 
                 }
@@ -189,7 +202,6 @@ namespace Apresentacao_J.iary.ModuloTarefa
         {
             radioButtonData.Checked = false;
             panelRotina.Visible = true;
-
         }
 
         private void radioButtonData_CheckedChanged(object sender, EventArgs e)
