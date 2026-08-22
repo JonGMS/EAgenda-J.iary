@@ -33,6 +33,12 @@ namespace Infra_BancoDadosORM_J.iary.ModuloTarefa
             builder.Property(x => x.Prioridade)
                 .HasColumnName("PRIORIDADE");
 
+            builder.Property(x => x.DataMarcada)
+                .HasColumnName("DATA_MARCADA")
+                .IsRequired(false);
+
+            //builder.Property(x => x.Rotina). // ESSE TEM QUE ARMAZENAR NA TB(ROTINA), COM O USUARIO E O ID DA TAREFA
+
             builder.Property(x => x.Status)
                 .HasColumnName("STATUS_TAREFA");
 
