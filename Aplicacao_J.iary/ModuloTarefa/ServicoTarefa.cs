@@ -85,7 +85,7 @@ namespace Aplicacao_J.iary.ModuloTarefa
                 return Result.Fail(ex.Message);
             }
         }
-        public Result<List<Tarefa>> SelecioarTodos(Usuario logado)
+        public Result<List<Tarefa>> SelecionarTodos(Usuario logado)
         {
             try
             {
