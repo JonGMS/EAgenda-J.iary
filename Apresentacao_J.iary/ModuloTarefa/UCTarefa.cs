@@ -44,11 +44,35 @@ namespace Apresentacao_J.iary.ModuloTarefa
             tarefa.Descricao = textBoxDescricao.Text;
             tarefa.Prioridade = comboBoxPrioridade.SelectedItem.ToString()[0];
             tarefa.Status = comboBoxStatus.SelectedItem.ToString()[0];
+            if (radioButtonRotina.Checked)
+                tarefa.Rotina = ObterDadosRotina();
+            else
+                tarefa.Rotina = new List<string>();
+
+            if (radioButtonData.Checked) 
+                tarefa.DataMarcada = dateTimePickerData.Value;
+            else
+                tarefa.DataMarcada = DateTime.MinValue;
+
             ObterDadosGrid();
             tarefa.CheckBoxes = CheckBoxes;
             tarefa.Armazenamento = comboBoxArmazenamento.SelectedItem.ToString()[0];
 
             //MessageBox.Show($"Prioridade: {tarefa.Prioridade}. \nStatus: {tarefa.Status}\n Armazenamento: {tarefa.Armazenamento}");
+        }
+
+        private List<string> ObterDadosRotina()
+        {
+            List<string> dias = new List<string>();
+            dias = checkBoxDomingo.Checked ? dias.Append("DOM").ToList() : dias;
+            dias = checkBoxSegunda.Checked ? dias.Append("SEG").ToList() : dias;
+            dias = checkBoxTerca.Checked ? dias.Append("TER").ToList() : dias;
+            dias = checkBoxQuarta.Checked ? dias.Append("QUA").ToList() : dias;
+            dias = checkBoxQuinta.Checked ? dias.Append("QUI").ToList() : dias;
+            dias = checkBoxSexta.Checked ? dias.Append("SEX").ToList() : dias;
+            dias = checkBoxSabado.Checked ? dias.Append("SAB").ToList() : dias;
+
+            return dias;
         }
 
         private void ObterDadosGrid()
@@ -159,6 +183,19 @@ namespace Apresentacao_J.iary.ModuloTarefa
             comboBoxArmazenamento.SelectedIndex = 0;
             comboBoxStatus.SelectedIndex = 0;
             comboBoxPrioridade.SelectedIndex = 0;
+        }
+
+        private void radioButtonRotina_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButtonData.Checked = false;
+            panelRotina.Visible = true;
+
+        }
+
+        private void radioButtonData_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButtonRotina.Checked = false;
+            panelRotina.Visible = false;
         }
     }
 }

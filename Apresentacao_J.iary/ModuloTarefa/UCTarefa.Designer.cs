@@ -46,7 +46,20 @@
             dataGridViewCheck = new DataGridView();
             labelErroTitulo = new Label();
             labelErroDescricao = new Label();
+            dateTimePickerData = new DateTimePicker();
+            labelData = new Label();
+            radioButtonRotina = new RadioButton();
+            panelRotina = new Panel();
+            checkBoxQuarta = new CheckBox();
+            checkBoxTerca = new CheckBox();
+            checkBoxSegunda = new CheckBox();
+            checkBoxDomingo = new CheckBox();
+            checkBoxQuinta = new CheckBox();
+            checkBoxSexta = new CheckBox();
+            checkBoxSabado = new CheckBox();
+            radioButtonData = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)dataGridViewCheck).BeginInit();
+            panelRotina.SuspendLayout();
             SuspendLayout();
             // 
             // labelTitulo
@@ -196,7 +209,7 @@
             // 
             labelCheckBox.AutoSize = true;
             labelCheckBox.Font = new Font("Copperplate Gothic Light", 12F);
-            labelCheckBox.Location = new Point(783, 81);
+            labelCheckBox.Location = new Point(783, 206);
             labelCheckBox.Name = "labelCheckBox";
             labelCheckBox.Size = new Size(121, 21);
             labelCheckBox.TabIndex = 16;
@@ -218,11 +231,11 @@
             // 
             dataGridViewCheck.BackgroundColor = Color.White;
             dataGridViewCheck.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCheck.Location = new Point(783, 106);
+            dataGridViewCheck.Location = new Point(783, 230);
             dataGridViewCheck.MultiSelect = false;
             dataGridViewCheck.Name = "dataGridViewCheck";
             dataGridViewCheck.RowHeadersWidth = 51;
-            dataGridViewCheck.Size = new Size(629, 532);
+            dataGridViewCheck.Size = new Size(629, 408);
             dataGridViewCheck.TabIndex = 19;
             // 
             // labelErroTitulo
@@ -243,11 +256,150 @@
             labelErroDescricao.Size = new Size(0, 20);
             labelErroDescricao.TabIndex = 21;
             // 
+            // dateTimePickerData
+            // 
+            dateTimePickerData.Font = new Font("Segoe UI", 12F);
+            dateTimePickerData.Location = new Point(783, 111);
+            dateTimePickerData.Name = "dateTimePickerData";
+            dateTimePickerData.Size = new Size(629, 34);
+            dateTimePickerData.TabIndex = 22;
+            // 
+            // labelData
+            // 
+            labelData.AutoSize = true;
+            labelData.Font = new Font("Copperplate Gothic Light", 12F);
+            labelData.Location = new Point(783, 82);
+            labelData.Name = "labelData";
+            labelData.Size = new Size(67, 21);
+            labelData.TabIndex = 23;
+            labelData.Text = "Data:";
+            // 
+            // radioButtonRotina
+            // 
+            radioButtonRotina.AutoSize = true;
+            radioButtonRotina.Location = new Point(1019, 81);
+            radioButtonRotina.Name = "radioButtonRotina";
+            radioButtonRotina.Size = new Size(73, 24);
+            radioButtonRotina.TabIndex = 24;
+            radioButtonRotina.Text = "Rotina";
+            radioButtonRotina.UseVisualStyleBackColor = true;
+            radioButtonRotina.CheckedChanged += radioButtonRotina_CheckedChanged;
+            // 
+            // panelRotina
+            // 
+            panelRotina.Controls.Add(checkBoxQuarta);
+            panelRotina.Controls.Add(checkBoxTerca);
+            panelRotina.Controls.Add(checkBoxSegunda);
+            panelRotina.Controls.Add(checkBoxDomingo);
+            panelRotina.Controls.Add(checkBoxQuinta);
+            panelRotina.Controls.Add(checkBoxSexta);
+            panelRotina.Controls.Add(checkBoxSabado);
+            panelRotina.Location = new Point(783, 111);
+            panelRotina.Name = "panelRotina";
+            panelRotina.Size = new Size(629, 68);
+            panelRotina.TabIndex = 25;
+            panelRotina.Visible = false;
+            // 
+            // checkBoxQuarta
+            // 
+            checkBoxQuarta.AutoSize = true;
+            checkBoxQuarta.CheckAlign = ContentAlignment.TopCenter;
+            checkBoxQuarta.Location = new Point(283, 14);
+            checkBoxQuarta.Name = "checkBoxQuarta";
+            checkBoxQuarta.Size = new Size(69, 41);
+            checkBoxQuarta.TabIndex = 3;
+            checkBoxQuarta.Text = "QUARTA";
+            checkBoxQuarta.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxTerca
+            // 
+            checkBoxTerca.AutoSize = true;
+            checkBoxTerca.CheckAlign = ContentAlignment.TopCenter;
+            checkBoxTerca.Location = new Point(201, 14);
+            checkBoxTerca.Name = "checkBoxTerca";
+            checkBoxTerca.Size = new Size(57, 41);
+            checkBoxTerca.TabIndex = 2;
+            checkBoxTerca.Text = "TERÇA";
+            checkBoxTerca.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSegunda
+            // 
+            checkBoxSegunda.AutoSize = true;
+            checkBoxSegunda.CheckAlign = ContentAlignment.TopCenter;
+            checkBoxSegunda.Location = new Point(100, 14);
+            checkBoxSegunda.Name = "checkBoxSegunda";
+            checkBoxSegunda.Size = new Size(81, 41);
+            checkBoxSegunda.TabIndex = 1;
+            checkBoxSegunda.Text = "SEGUNDA";
+            checkBoxSegunda.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxDomingo
+            // 
+            checkBoxDomingo.AutoSize = true;
+            checkBoxDomingo.CheckAlign = ContentAlignment.TopCenter;
+            checkBoxDomingo.Location = new Point(10, 14);
+            checkBoxDomingo.Name = "checkBoxDomingo";
+            checkBoxDomingo.Size = new Size(84, 41);
+            checkBoxDomingo.TabIndex = 0;
+            checkBoxDomingo.Text = "DOMINGO";
+            checkBoxDomingo.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxQuinta
+            // 
+            checkBoxQuinta.AutoSize = true;
+            checkBoxQuinta.CheckAlign = ContentAlignment.TopCenter;
+            checkBoxQuinta.Location = new Point(373, 14);
+            checkBoxQuinta.Name = "checkBoxQuinta";
+            checkBoxQuinta.Size = new Size(66, 41);
+            checkBoxQuinta.TabIndex = 5;
+            checkBoxQuinta.Text = "QUINTA";
+            checkBoxQuinta.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSexta
+            // 
+            checkBoxSexta.AutoSize = true;
+            checkBoxSexta.CheckAlign = ContentAlignment.TopCenter;
+            checkBoxSexta.Location = new Point(466, 14);
+            checkBoxSexta.Name = "checkBoxSexta";
+            checkBoxSexta.Size = new Size(55, 41);
+            checkBoxSexta.TabIndex = 6;
+            checkBoxSexta.Text = "SEXTA";
+            checkBoxSexta.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSabado
+            // 
+            checkBoxSabado.AutoSize = true;
+            checkBoxSabado.CheckAlign = ContentAlignment.TopCenter;
+            checkBoxSabado.Location = new Point(546, 14);
+            checkBoxSabado.Name = "checkBoxSabado";
+            checkBoxSabado.Size = new Size(72, 41);
+            checkBoxSabado.TabIndex = 7;
+            checkBoxSabado.Text = "SABADO";
+            checkBoxSabado.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonData
+            // 
+            radioButtonData.AutoSize = true;
+            radioButtonData.Checked = true;
+            radioButtonData.Location = new Point(873, 81);
+            radioButtonData.Name = "radioButtonData";
+            radioButtonData.Size = new Size(126, 24);
+            radioButtonData.TabIndex = 26;
+            radioButtonData.TabStop = true;
+            radioButtonData.Text = "Selecionar Dia";
+            radioButtonData.UseVisualStyleBackColor = true;
+            radioButtonData.CheckedChanged += radioButtonData_CheckedChanged;
+            // 
             // UCTarefa
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            Controls.Add(radioButtonData);
+            Controls.Add(panelRotina);
+            Controls.Add(radioButtonRotina);
+            Controls.Add(labelData);
+            Controls.Add(dateTimePickerData);
             Controls.Add(labelErroDescricao);
             Controls.Add(labelErroTitulo);
             Controls.Add(dataGridViewCheck);
@@ -270,6 +422,8 @@
             Size = new Size(1600, 835);
             Load += UCTarefa_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewCheck).EndInit();
+            panelRotina.ResumeLayout(false);
+            panelRotina.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -295,5 +449,17 @@
         public DataGridView dataGridViewCheck;
         private Label labelErroTitulo;
         private Label labelErroDescricao;
+        private DateTimePicker dateTimePickerData;
+        private Label labelData;
+        private RadioButton radioButtonRotina;
+        private Panel panelRotina;
+        private RadioButton radioButtonData;
+        private CheckBox checkBoxSegunda;
+        private CheckBox checkBoxDomingo;
+        private CheckBox checkBoxQuarta;
+        private CheckBox checkBoxTerca;
+        private CheckBox checkBoxQuinta;
+        private CheckBox checkBoxSexta;
+        private CheckBox checkBoxSabado;
     }
 }
