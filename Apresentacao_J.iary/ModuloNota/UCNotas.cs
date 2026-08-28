@@ -1,6 +1,8 @@
 ﻿using Apresentacao_J.iary.Compartilhado;
 using Apresentacao_J.iary.Compartilhado.ServiceLocator;
 using Apresentacao_J.iary.ModuloCategoria;
+using Apresentacao_J.iary.ModuloCofre;
+using Apresentacao_J.iary.ModuloTarefa;
 using Dominio_J.iary.ModuloCategoria;
 using Dominio_J.iary.ModuloNota;
 using Dominio_J.iary.ModuloTarefa;
@@ -24,6 +26,7 @@ namespace Apresentacao_J.iary.ModuloNota
         private IServiceLocator ServiceLocator;
         private Usuario Logged;
         private Nota nota = new Nota();
+        private bool Desbloqueado;
         public UCNotas(Usuario usuarioLogado, IServiceLocator serviceLocator, List<Categoria> listagemCategoria, List<Tarefa> listagemTarefa)
         {
             
@@ -178,6 +181,11 @@ namespace Apresentacao_J.iary.ModuloNota
             try
             {
                 ObterDados();
+                if (!Desbloqueado && comboBoxArmazenamento.SelectedItem.ToString() == "Cofre")
+                {
+                    labelErroArmazenamento.Text = "O cofre pessoal ainda está bloqueado";
+                    return;
+                }
                 var resultadoGravacao = GravarDados(nota, Logged);
 
                 if (resultadoGravacao.IsFailed)
@@ -216,7 +224,26 @@ namespace Apresentacao_J.iary.ModuloNota
             nota.UsuarioId = Logged.Id;
 
             nota.Arquivos = anexos;
-            nota.Armazenamento = comboBoxArmazenamento.SelectedItem.ToString()[0];
+            if (controlador == null)
+            {
+                controlador = ServiceLocator.Get<ControladorCofre>();
+            }
+            if (comboBoxArmazenamento.SelectedItem == "Cofre")
+            {
+                if (!ServiceLocator.ConferirCofre())
+                {
+                    controlador.Inserir();
+                    if (ServiceLocator.ConferirCofre())
+                    {
+                        Desbloqueado = true;
+                        nota.Armazenamento = comboBoxArmazenamento.SelectedItem.ToString()[0];
+                    }
+                    else
+                        Desbloqueado = false;
+                }
+            }
+            else
+                nota.Armazenamento = comboBoxArmazenamento.SelectedItem.ToString()[0];
         }
 
         private void PersonalizarComboBox()

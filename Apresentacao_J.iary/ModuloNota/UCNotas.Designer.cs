@@ -51,6 +51,7 @@
             buttonAdicionarCategoria = new Button();
             labelMensagemErroCategoria = new Label();
             labelMensagemErroTarefa = new Label();
+            labelErroArmazenamento = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAnexos).BeginInit();
             SuspendLayout();
             // 
@@ -288,10 +289,20 @@
             labelMensagemErroTarefa.Size = new Size(0, 20);
             labelMensagemErroTarefa.TabIndex = 44;
             // 
+            // labelErroArmazenamento
+            // 
+            labelErroArmazenamento.AutoSize = true;
+            labelErroArmazenamento.ForeColor = Color.Red;
+            labelErroArmazenamento.Location = new Point(960, 379);
+            labelErroArmazenamento.Name = "labelErroArmazenamento";
+            labelErroArmazenamento.Size = new Size(0, 20);
+            labelErroArmazenamento.TabIndex = 45;
+            // 
             // UCNotas
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(labelErroArmazenamento);
             Controls.Add(labelMensagemErroTarefa);
             Controls.Add(labelMensagemErroCategoria);
             Controls.Add(buttonAdicionarCategoria);
@@ -347,5 +358,6 @@
         private Label labelMensagemErroCategoria;
         public ComboBox comboBoxTarefa;
         private Label labelMensagemErroTarefa;
+        private Label labelErroArmazenamento;
     }
 }
