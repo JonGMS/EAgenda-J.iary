@@ -27,6 +27,7 @@ using Aplicacao_J.iary.ModuloCofre;
 using Apresentacao_J.iary.ModuloCofre;
 using Infra_BancoDadosORM_J.iary.ModuloCofre;
 using Dominio_J.iary.ModuloCofre;
+using Aplicacao_J.iary.ModuloCriptografar;
 
 namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
 {
@@ -108,9 +109,10 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             var servicoCofre = new ServicoCofre(repositorioCofre, contextoDadosOrm);
             controladores["ControladorCofre"] = new ControladorCofre(this, Logged, servicoCofre);
 
+            var servicoCriptografia = new ServicoCriptografia(Logged.Password);
             var ucTarefa = new UCTarefa(Logged, this);
             var repositorioTarefa = new RepositorioTarefaORM(contextoDadosOrm);
-            var servicoTarefa = new ServicoTarefa(repositorioTarefa, contextoDadosOrm, repositorioRotina);
+            var servicoTarefa = new ServicoTarefa(repositorioTarefa, contextoDadosOrm, repositorioRotina, servicoCriptografia);
             var controladorTarefa = new ControladorTarefa(ucInserir, servicoTarefa, Logged, this);
             inserir["ControladorTarefa"] = controladorTarefa.Inserir;
 
