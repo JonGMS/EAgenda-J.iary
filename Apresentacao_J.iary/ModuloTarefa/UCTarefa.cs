@@ -1,5 +1,9 @@
-﻿using Apresentacao_J.iary.Compartilhado;
+﻿using Aplicacao_J.iary.ModuloCofre;
+using Apresentacao_J.iary.Compartilhado;
 using Apresentacao_J.iary.Compartilhado.ServiceLocator;
+using Apresentacao_J.iary.ModuloCofre;
+using Dominio_J.iary.ModuloCofre;
+using Dominio_J.iary.ModuloNota;
 using Dominio_J.iary.ModuloRotina;
 using Dominio_J.iary.ModuloTarefa;
 using Dominio_J.iary.ModuloUsuario;
@@ -19,16 +23,21 @@ namespace Apresentacao_J.iary.ModuloTarefa
 {
     public partial class UCTarefa : UserControl
     {
+        private ControladorBase controlador;
+        private IServiceLocator ServiceLocator;
         private List<ValoresCheckBox> CheckBoxes = new List<ValoresCheckBox>();
         private List<Rotina> rotinas = new List<Rotina>();
         private Usuario Logged;
         private Tarefa tarefa;
         private string _MensagemErro;
-        public UCTarefa(Usuario usuarioLogged)
+        private bool Verificar;
+        private bool Desbloqueado;
+
+        public UCTarefa(Usuario usuarioLogged, IServiceLocator serviceLocator)
         {
             Logged = usuarioLogged;
             tarefa = new Tarefa(Logged);
-
+            ServiceLocator = serviceLocator;
             InitializeComponent();
         }
 
@@ -58,7 +67,28 @@ namespace Apresentacao_J.iary.ModuloTarefa
 
             ObterDadosGrid();
             tarefa.CheckBoxes = CheckBoxes;
-            tarefa.Armazenamento = comboBoxArmazenamento.SelectedItem.ToString()[0];
+            if(controlador == null)
+            {
+                controlador = ServiceLocator.Get<ControladorCofre>();
+            }
+            if (comboBoxArmazenamento.SelectedItem == "Cofre")
+            {
+                if (!ServiceLocator.ConferirCofre())
+                {
+                    controlador.Inserir();
+                    if (ServiceLocator.ConferirCofre())
+                    {
+                        Desbloqueado = true;
+                        tarefa.Armazenamento = comboBoxArmazenamento.SelectedItem.ToString()[0];
+                    }
+
+                    else
+                        Desbloqueado = false;
+                }   
+            }
+            else 
+                tarefa.Armazenamento = comboBoxArmazenamento.SelectedItem.ToString()[0];
+
 
             //MessageBox.Show($"Prioridade: {tarefa.Prioridade}. \nStatus: {tarefa.Status}\n Armazenamento: {tarefa.Armazenamento}");
         }
@@ -127,7 +157,11 @@ namespace Apresentacao_J.iary.ModuloTarefa
         private void buttonFinalizar_Click(object sender, EventArgs e)
         {
             ObterDados();
-
+            if (!Desbloqueado && comboBoxArmazenamento.SelectedItem.ToString() == "Cofre")
+            {
+                labelErroArmazenamento.Text = "O cofre pessoal ainda está bloqueado";
+                return;
+            }
             var resultado = GravarDados(tarefa, rotinas);
             if (resultado.IsFailed)
             {
