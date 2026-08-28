@@ -23,6 +23,10 @@ using Aplicacao_J.iary.ModuloCategoria;
 using Apresentacao_J.iary.ModuloCategoria;
 using Infra_BancoDadosORM_J.iary.ModuloCategoria;
 using Infra_BancoDadosORM_J.iary.ModuloRotina;
+using Aplicacao_J.iary.ModuloCofre;
+using Apresentacao_J.iary.ModuloCofre;
+using Infra_BancoDadosORM_J.iary.ModuloCofre;
+using Dominio_J.iary.ModuloCofre;
 
 namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
 {
@@ -34,6 +38,7 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
         private Dictionary<string, Action> Editar = new Dictionary<string, Action>();
         private Dictionary<string, Action> Excluir = new Dictionary<string, Action>();
         private Dictionary<string, Action> Listar = new Dictionary<string, Action>();
+        public Cofre cofre;
         private Usuario Logged;
         private UCInserir ucInserir;
         private JiaryDbContext contextoDadosOrm;
@@ -99,10 +104,14 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
 
             var repositorioRotina = new RepositorioRotinaORM(contextoDadosOrm);
 
-            var ucTarefa = new UCTarefa(Logged);
+            var repositorioCofre = new RepositorioCofreORM(contextoDadosOrm);
+            var servicoCofre = new ServicoCofre(repositorioCofre, contextoDadosOrm);
+            controladores["ControladorCofre"] = new ControladorCofre(this, Logged, servicoCofre);
+
+            var ucTarefa = new UCTarefa(Logged, this);
             var repositorioTarefa = new RepositorioTarefaORM(contextoDadosOrm);
             var servicoTarefa = new ServicoTarefa(repositorioTarefa, contextoDadosOrm, repositorioRotina);
-            var controladorTarefa = new ControladorTarefa(ucInserir, servicoTarefa, Logged);
+            var controladorTarefa = new ControladorTarefa(ucInserir, servicoTarefa, Logged, this);
             inserir["ControladorTarefa"] = controladorTarefa.Inserir;
 
             var repositorioCategoria = new RepositorioCategoriaORM(contextoDadosOrm);
@@ -136,6 +145,16 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
         public Usuario ApresentarUsuario()
         {
             return Logged;
+        }
+
+        public void ArmazenarCofre(Cofre cofre)
+        {
+            this.cofre = cofre;
+        }
+
+        public bool ConferirCofre()
+        {
+            return cofre != null;
         }
     }
 }
