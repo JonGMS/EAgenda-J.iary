@@ -1,6 +1,10 @@
-﻿using Dominio_J.iary.ModuloCofre;
+﻿using Dominio_J.iary.Compartilhado;
+using Dominio_J.iary.ModuloCategoria;
+using Dominio_J.iary.ModuloCofre;
 using Dominio_J.iary.ModuloUsuario;
 using FluentResults;
+using FluentValidation.Results;
+using Infra_BancoDadosORM_J.iary.ModuloCofre;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +15,61 @@ namespace Aplicacao_J.iary.ModuloCofre
 {
     public class ServicoCofre
     {
-        public ServicoCofre()
+        private RepositorioCofreORM repositorioCofre;
+        private IContextoPersistencia contexto;
+        public ServicoCofre(RepositorioCofreORM repositorioCofre, IContextoPersistencia contextoPersistencia)
         {
-            
+            this.repositorioCofre = repositorioCofre;
+            contexto = contextoPersistencia;
         }
 
-        public Result<Cofre> Inserir(Cofre cofre)
+        public Result<Cofre> Inserir(Cofre cofre) //Insere cofre caso não haja
         {
-            return Result.Ok(cofre);
+            try
+            {
+                var resultadoValidacao = ValidarCofre(cofre);
+                if (resultadoValidacao.IsFailed)
+                {
+                    return resultadoValidacao;
+                }
+
+                repositorioCofre.Inserir(cofre);
+
+                contexto.GravarDados();
+
+                return Result.Ok(cofre);
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(ex.Message);
+            }
+
         }
-        public Result<bool> VerificarCofre(Usuario usuario)
+
+        private Result<Cofre> ValidarCofre(Cofre cofre)
         {
-            return Result.Ok(true);
+            List<Error> erros = new List<Error>();
+
+            var validador = new ValidadorCofre();
+
+            var resultadoValidacao = validador.Validate(cofre);
+            foreach (ValidationFailure item in resultadoValidacao.Errors)
+                erros.Add(new Error(item.ErrorMessage));
+
+            if (erros.Any())
+                return Result.Fail(erros);
+
+            return Result.Ok();
+        }
+
+        public bool VerificarCofre(Usuario usuario) // Verifica se o usuario já possui cofre
+        {
+
+            return repositorioCofre.VerificarCofre(usuario);
+
         }
                          
-        public Result<Cofre> DesbloquearCofre(Cofre cofre)
+        public Result<Cofre> DesbloquearCofre(Cofre cofre)// Desbloqueia o cofre se a senha estiver correta
         {
             return Result.Ok(cofre);
         }
