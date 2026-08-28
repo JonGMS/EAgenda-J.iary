@@ -58,6 +58,7 @@
             checkBoxSexta = new CheckBox();
             checkBoxSabado = new CheckBox();
             radioButtonData = new RadioButton();
+            labelErroArmazenamento = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewCheck).BeginInit();
             panelRotina.SuspendLayout();
             SuspendLayout();
@@ -390,11 +391,22 @@
             radioButtonData.UseVisualStyleBackColor = true;
             radioButtonData.CheckedChanged += radioButtonData_CheckedChanged;
             // 
+            // labelErroArmazenamento
+            // 
+            labelErroArmazenamento.AutoSize = true;
+            labelErroArmazenamento.BackColor = Color.Transparent;
+            labelErroArmazenamento.ForeColor = Color.Red;
+            labelErroArmazenamento.Location = new Point(310, 569);
+            labelErroArmazenamento.Name = "labelErroArmazenamento";
+            labelErroArmazenamento.Size = new Size(0, 20);
+            labelErroArmazenamento.TabIndex = 27;
+            // 
             // UCTarefa
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            Controls.Add(labelErroArmazenamento);
             Controls.Add(radioButtonData);
             Controls.Add(panelRotina);
             Controls.Add(radioButtonRotina);
@@ -461,5 +473,6 @@
         private CheckBox checkBoxQuinta;
         private CheckBox checkBoxSexta;
         private CheckBox checkBoxSabado;
+        private Label labelErroArmazenamento;
     }
 }
