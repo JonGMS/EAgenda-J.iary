@@ -71,7 +71,28 @@ namespace Aplicacao_J.iary.ModuloCofre
                          
         public Result<Cofre> DesbloquearCofre(Cofre cofre)// Desbloqueia o cofre se a senha estiver correta
         {
-            return Result.Ok(cofre);
+            try
+            {
+                var cofreRecebido = repositorioCofre.SelecionarPorId(cofre.UsuarioId);
+                
+                if (Desbloquear(cofreRecebido, cofre))
+                {
+                    return Result.Ok(cofreRecebido);
+                }
+                else
+                {
+                    return Result.Fail("Senha incorreta");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail("Erro inesperado ao desbloquear o cofre");
+            }
+        }
+
+        private bool Desbloquear(Cofre cofreRecebido, Cofre cofreFornecido)
+        {
+            return cofreRecebido.Senha == cofreFornecido.Senha;
         }
     }
 }
