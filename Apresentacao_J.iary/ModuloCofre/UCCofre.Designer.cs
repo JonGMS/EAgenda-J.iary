@@ -46,7 +46,7 @@
             // 
             labelMensagemErro.AutoSize = true;
             labelMensagemErro.ForeColor = Color.Red;
-            labelMensagemErro.Location = new Point(179, 287);
+            labelMensagemErro.Location = new Point(103, 255);
             labelMensagemErro.Name = "labelMensagemErro";
             labelMensagemErro.Size = new Size(0, 20);
             labelMensagemErro.TabIndex = 26;
@@ -64,6 +64,7 @@
             buttonDesbloquear.TabIndex = 24;
             buttonDesbloquear.Text = "DESBLOQUEAR";
             buttonDesbloquear.UseVisualStyleBackColor = false;
+            buttonDesbloquear.Click += buttonDesbloquear_Click;
             // 
             // panel3
             // 
@@ -112,6 +113,7 @@
             buttonFechar.Size = new Size(50, 50);
             buttonFechar.TabIndex = 2;
             buttonFechar.UseVisualStyleBackColor = true;
+            buttonFechar.Click += buttonFechar_Click;
             // 
             // pictureBoxLogo
             // 
@@ -132,6 +134,7 @@
             labelTitulo.Size = new Size(132, 32);
             labelTitulo.TabIndex = 27;
             labelTitulo.Text = "COFRE";
+            labelTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // UCCofre
             // 
@@ -146,7 +149,7 @@
             Controls.Add(labelPassword);
             Controls.Add(paneltitulo);
             Name = "UCCofre";
-            Size = new Size(540, 450);
+            Size = new Size(544, 450);
             paneltitulo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
             ResumeLayout(false);
@@ -157,13 +160,13 @@
 
         public Label labelMensagemErro;
         private LinkLabel linkLabelCadastrar;
-        private Button buttonDesbloquear;
         private Panel panel3;
         public TextBox textBoxPassWord;
         private Label labelPassword;
         private Panel paneltitulo;
         private Button buttonFechar;
         private PictureBox pictureBoxLogo;
-        private Label labelTitulo;
+        public Label labelTitulo;
+        public Button buttonDesbloquear;
     }
 }
