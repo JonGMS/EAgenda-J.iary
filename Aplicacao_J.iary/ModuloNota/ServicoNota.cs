@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Dominio_J.iary.ModuloTarefa;
+using Aplicacao_J.iary.ModuloCriptografar;
 
 namespace Aplicacao_J.iary.ModuloNota
 {
@@ -18,10 +20,12 @@ namespace Aplicacao_J.iary.ModuloNota
     {
         private IContextoPersistencia ContextoPersistencia;
         private RepositorioNotaORM RepositorioNotaORM;
-        public ServicoNota(IContextoPersistencia contextoPersistencia, RepositorioNotaORM repositorioNota)
+        private ServicoCriptografia servicoCriptografia;
+        public ServicoNota(IContextoPersistencia contextoPersistencia, RepositorioNotaORM repositorioNota, ServicoCriptografia servicoCriptografia)
         {
             ContextoPersistencia = contextoPersistencia;
             RepositorioNotaORM = repositorioNota;
+            this.servicoCriptografia = servicoCriptografia;
         }
 
         public Result<Nota> Inserir(Nota nota, Usuario logado)
@@ -35,7 +39,15 @@ namespace Aplicacao_J.iary.ModuloNota
                     return Result.Fail(resultadoValidacao.Errors);
                 }
 
-                RepositorioNotaORM.Inserir(nota);
+                if (nota.Armazenamento == 'C')
+                {
+                    var tarefaCriptografada = CriptografarNota(nota);
+                    RepositorioNotaORM.Inserir(tarefaCriptografada);
+                }
+                else
+                    RepositorioNotaORM.Inserir(nota);
+
+
                 ContextoPersistencia.GravarDados();
                 return Result.Ok(nota);
             }
@@ -43,6 +55,21 @@ namespace Aplicacao_J.iary.ModuloNota
             {
                 return Result.Fail(ex.Message);
             }
+        }
+        private Nota CriptografarNota(Nota nota)
+        {
+            nota.Titulo = servicoCriptografia.Criptografar(nota.Titulo);
+
+            if (!string.IsNullOrWhiteSpace(nota.Descricao))
+                nota.Descricao =
+                    servicoCriptografia.Criptografar(nota.Descricao);
+
+            foreach(Anexo anexo in nota.Arquivos)
+            {
+                anexo.Arquivo = servicoCriptografia.Criptografar(anexo.Arquivo);
+            }
+
+                return nota;
         }
 
         private Result<Nota> ValidarNota(Nota nota, Usuario logado)
