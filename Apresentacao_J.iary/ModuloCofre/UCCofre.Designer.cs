@@ -76,6 +76,7 @@
             // 
             // textBoxPassWord
             // 
+            textBoxPassWord.BackColor = Color.White;
             textBoxPassWord.BorderStyle = BorderStyle.None;
             textBoxPassWord.Font = new Font("Segoe UI", 15F);
             textBoxPassWord.Location = new Point(122, 211);
@@ -100,7 +101,7 @@
             paneltitulo.BorderStyle = BorderStyle.FixedSingle;
             paneltitulo.Controls.Add(buttonFechar);
             paneltitulo.Controls.Add(pictureBoxLogo);
-            paneltitulo.Location = new Point(0, 1);
+            paneltitulo.Location = new Point(0, 0);
             paneltitulo.Name = "paneltitulo";
             paneltitulo.Size = new Size(543, 82);
             paneltitulo.TabIndex = 17;
@@ -141,6 +142,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            BorderStyle = BorderStyle.FixedSingle;
             Controls.Add(labelTitulo);
             Controls.Add(labelMensagemErro);
             Controls.Add(buttonDesbloquear);
@@ -149,7 +151,7 @@
             Controls.Add(labelPassword);
             Controls.Add(paneltitulo);
             Name = "UCCofre";
-            Size = new Size(544, 450);
+            Size = new Size(542, 448);
             paneltitulo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
             ResumeLayout(false);
