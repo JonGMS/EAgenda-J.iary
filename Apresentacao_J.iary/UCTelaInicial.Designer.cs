@@ -182,6 +182,7 @@
             buttonCofre.TabIndex = 3;
             buttonCofre.Text = "Cofre";
             buttonCofre.UseVisualStyleBackColor = true;
+            buttonCofre.Click += buttonCofre_Click;
             // 
             // buttonDiario
             // 
