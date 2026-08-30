@@ -1,5 +1,6 @@
 ﻿using Apresentacao_J.iary.Compartilhado;
 using Apresentacao_J.iary.Compartilhado.ServiceLocator;
+using Apresentacao_J.iary.ModuloCofre;
 using Apresentacao_J.iary.ModuloDashboard;
 using Apresentacao_J.iary.ModuloInserir;
 using Apresentacao_J.iary.ModuloPerfil;
@@ -31,7 +32,7 @@ namespace Apresentacao_J.iary
             PersoalizarUsuario();
             pictureBoxUsuarioIcon.Enabled = false;
             pictureBoxCombo.Enabled = false;
-            panelContent.Controls.Add(new UCDashboard());
+            panelContent.Controls.Add(new UCDashBoard());
         }
 
         private void buttonInserir_Click(object sender, EventArgs e)
@@ -61,6 +62,14 @@ namespace Apresentacao_J.iary
 
         private void panelComboPerfil_Click(object sender, EventArgs e)
         {
+            if(ucPerfil != null)
+            {
+                if(ucPerfil.Visible == true )
+                {
+                    ucPerfil.Visible = false;
+                    return;
+                }
+            }
 
             if (ucPerfil == null || ucPerfil.IsDisposed)
             {
@@ -100,9 +109,23 @@ namespace Apresentacao_J.iary
 
         private void pictureBoxLogo_Click(object sender, EventArgs e)
         {
-            UCDashboard dashboard = new UCDashboard();
+            UCDashBoard dashboard = new UCDashBoard();
             panelContent.Controls.Clear();
             panelContent.Controls.Add(dashboard);
+        }
+
+        private void buttonCofre_Click(object sender, EventArgs e)
+        {
+            if (!serviceLocator.ConferirCofre())
+            {
+                controlador = serviceLocator.Get<ControladorCofre>();
+                controlador.Inserir();
+                if (!serviceLocator.ConferirCofre())
+                    return;
+            }
+            panelContent.BackColor = Color.Red;
+
+
         }
     }
 }
