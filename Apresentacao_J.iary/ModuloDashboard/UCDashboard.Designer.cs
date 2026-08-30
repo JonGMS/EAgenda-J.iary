@@ -1,6 +1,6 @@
 ﻿namespace Apresentacao_J.iary.ModuloDashboard
 {
-    partial class UCDashboard
+    partial class UCDashBoard
     {
         /// <summary> 
         /// Variável de designer necessária.
@@ -44,11 +44,18 @@
             labelSexta = new Label();
             labelSabado = new Label();
             labelTarefa = new Label();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            panel3 = new Panel();
+            panel5 = new Panel();
+            labelNotas = new Label();
+            labelContato = new Label();
+            labelDiario = new Label();
             SuspendLayout();
             // 
             // panelDomingo
             // 
-            panelDomingo.BackColor = SystemColors.ControlLight;
+            panelDomingo.BackColor = Color.FromArgb(247, 247, 247);
             panelDomingo.Location = new Point(29, 100);
             panelDomingo.Name = "panelDomingo";
             panelDomingo.Size = new Size(155, 125);
@@ -66,7 +73,7 @@
             // 
             // panelSegunda
             // 
-            panelSegunda.BackColor = SystemColors.ControlLight;
+            panelSegunda.BackColor = Color.FromArgb(247, 247, 247);
             panelSegunda.Location = new Point(259, 100);
             panelSegunda.Name = "panelSegunda";
             panelSegunda.Size = new Size(155, 125);
@@ -74,7 +81,7 @@
             // 
             // panelTerca
             // 
-            panelTerca.BackColor = SystemColors.ControlLight;
+            panelTerca.BackColor = Color.FromArgb(247, 247, 247);
             panelTerca.Location = new Point(489, 100);
             panelTerca.Name = "panelTerca";
             panelTerca.Size = new Size(155, 125);
@@ -82,7 +89,7 @@
             // 
             // panelQuarta
             // 
-            panelQuarta.BackColor = SystemColors.ControlLight;
+            panelQuarta.BackColor = Color.FromArgb(247, 247, 247);
             panelQuarta.Location = new Point(719, 100);
             panelQuarta.Name = "panelQuarta";
             panelQuarta.Size = new Size(155, 125);
@@ -90,7 +97,7 @@
             // 
             // panelQuinta
             // 
-            panelQuinta.BackColor = SystemColors.ControlLight;
+            panelQuinta.BackColor = Color.FromArgb(247, 247, 247);
             panelQuinta.Location = new Point(949, 100);
             panelQuinta.Name = "panelQuinta";
             panelQuinta.Size = new Size(155, 125);
@@ -98,7 +105,7 @@
             // 
             // panelSexta
             // 
-            panelSexta.BackColor = SystemColors.ControlLight;
+            panelSexta.BackColor = Color.FromArgb(247, 247, 247);
             panelSexta.Location = new Point(1179, 100);
             panelSexta.Name = "panelSexta";
             panelSexta.Size = new Size(155, 125);
@@ -106,7 +113,7 @@
             // 
             // panelSabado
             // 
-            panelSabado.BackColor = SystemColors.ControlLight;
+            panelSabado.BackColor = Color.FromArgb(247, 247, 247);
             panelSabado.Location = new Point(1409, 100);
             panelSabado.Name = "panelSabado";
             panelSabado.Size = new Size(155, 125);
@@ -186,16 +193,86 @@
             // 
             labelTarefa.AutoSize = true;
             labelTarefa.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelTarefa.Location = new Point(52, 314);
+            labelTarefa.Location = new Point(494, 314);
             labelTarefa.Name = "labelTarefa";
             labelTarefa.Size = new Size(112, 25);
             labelTarefa.TabIndex = 11;
             labelTarefa.Text = "Tarefas";
             // 
-            // UCDashboard
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(247, 247, 247);
+            panel1.Location = new Point(489, 362);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(615, 463);
+            panel1.TabIndex = 12;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.FromArgb(247, 247, 247);
+            panel2.Location = new Point(29, 362);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(385, 463);
+            panel2.TabIndex = 13;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.FromArgb(247, 247, 247);
+            panel3.Location = new Point(1179, 362);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(385, 193);
+            panel3.TabIndex = 14;
+            // 
+            // panel5
+            // 
+            panel5.BackColor = Color.FromArgb(247, 247, 247);
+            panel5.Location = new Point(1179, 629);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(385, 196);
+            panel5.TabIndex = 16;
+            // 
+            // labelNotas
+            // 
+            labelNotas.AutoSize = true;
+            labelNotas.BackColor = SystemColors.Control;
+            labelNotas.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelNotas.Location = new Point(29, 314);
+            labelNotas.Name = "labelNotas";
+            labelNotas.Size = new Size(101, 25);
+            labelNotas.TabIndex = 17;
+            labelNotas.Text = "NOTAS";
+            // 
+            // labelContato
+            // 
+            labelContato.AutoSize = true;
+            labelContato.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelContato.Location = new Point(1184, 592);
+            labelContato.Name = "labelContato";
+            labelContato.Size = new Size(121, 25);
+            labelContato.TabIndex = 18;
+            labelContato.Text = "Contato";
+            // 
+            // labelDiario
+            // 
+            labelDiario.AutoSize = true;
+            labelDiario.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelDiario.Location = new Point(1179, 314);
+            labelDiario.Name = "labelDiario";
+            labelDiario.Size = new Size(89, 25);
+            labelDiario.TabIndex = 19;
+            labelDiario.Text = "Diario";
+            // 
+            // UCDashBoard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(labelDiario);
+            Controls.Add(labelContato);
+            Controls.Add(labelNotas);
+            Controls.Add(panel5);
+            Controls.Add(panel3);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Controls.Add(labelTarefa);
             Controls.Add(labelSabado);
             Controls.Add(labelSexta);
@@ -212,7 +289,7 @@
             Controls.Add(panelSegunda);
             Controls.Add(labelRotina);
             Controls.Add(panelDomingo);
-            Name = "UCDashboard";
+            Name = "UCDashBoard";
             Size = new Size(1597, 919);
             ResumeLayout(false);
             PerformLayout();
@@ -236,5 +313,12 @@
         private Label labelSexta;
         private Label labelSabado;
         private Label labelTarefa;
+        private Panel panel1;
+        private Panel panel2;
+        private Panel panel3;
+        private Panel panel5;
+        private Label labelNotas;
+        private Label labelContato;
+        private Label labelDiario;
     }
 }
