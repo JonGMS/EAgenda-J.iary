@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Apresentacao_J.iary.ModuloDashboard
 {
-    public partial class UCDashboard : UserControl
+    public partial class UCDashBoard : UserControl
     {
-        public UCDashboard()
+        public UCDashBoard()
         {
             InitializeComponent();
         }
