@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Apresentacao_J.iary.Compartilhado;
+using Apresentacao_J.iary.Compartilhado.ServiceLocator;
+using Apresentacao_J.iary.ModuloUsuario.ModuloPerfil;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,12 +15,20 @@ namespace Apresentacao_J.iary.ModuloPerfil
 {
     public partial class UCSubMenuPerfil : UserControl
     {
-        private UCTelaInicial telaPrincipal;
-        public UCSubMenuPerfil(UCTelaInicial tela)
+        private ControladorBase controlador;
+
+        private IServiceLocator serviceLocator;
+        public UCSubMenuPerfil(IServiceLocator serviceLocator)
         {
+            this.serviceLocator = serviceLocator; 
             InitializeComponent();
-            telaPrincipal = tela;
         }
 
+        private void buttonPerfil_Click(object sender, EventArgs e)
+        {
+            controlador = serviceLocator.Get<ControladorPerfil>();
+
+            controlador.Inserir();
+        }
     }
 }
