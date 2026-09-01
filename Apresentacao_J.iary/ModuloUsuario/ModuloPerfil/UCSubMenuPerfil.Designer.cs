@@ -47,6 +47,7 @@
             buttonPerfil.Text = "ABRIR PERFIL";
             buttonPerfil.TextAlign = ContentAlignment.MiddleRight;
             buttonPerfil.UseVisualStyleBackColor = true;
+            buttonPerfil.Click += buttonPerfil_Click;
             // 
             // buttonLogout
             // 

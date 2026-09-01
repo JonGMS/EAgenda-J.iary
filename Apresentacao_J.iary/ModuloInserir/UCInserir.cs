@@ -30,7 +30,7 @@ namespace Apresentacao_J.iary.ModuloInserir
             {
                 //controlador = ServiceLocator.Get<ControladorTarefa>();
                 //controlador.Inserir();
-                ServiceLocator.ExecutarInsercao("ControladorTarefa");
+                ServiceLocator.ExecutarSubMenu("ControladorTarefa");
 
             }
             catch (Exception ex)
@@ -48,7 +48,7 @@ namespace Apresentacao_J.iary.ModuloInserir
 
         private void buttonNota_Click(object sender, EventArgs e)
         {
-            ServiceLocator.ExecutarInsercao("ControladorNota");
+            ServiceLocator.ExecutarSubMenu("ControladorNota");
         }
     }
 }

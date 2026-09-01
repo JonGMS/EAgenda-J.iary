@@ -26,10 +26,11 @@ namespace Apresentacao_J.iary.ModuloCofre
 
         public override void Inserir()
         {
-            UCCofre ucCofre = new UCCofre(Logged);
+            UCCofre ucCofre = new UCCofre(Logged, ServiceLocator);
+
             ucCofre.Dock = DockStyle.Fill;
             ucCofre.GravarDados = servicoCofre.Inserir;
-            ucCofre.Verificar = servicoCofre.VerificarCofre;
+            ucCofre.Verificar =  servicoCofre.VerificarCofre;
             ucCofre.Desbloquear = servicoCofre.DesbloquearCofre;
         }
     }

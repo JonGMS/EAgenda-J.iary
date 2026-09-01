@@ -142,7 +142,6 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             controladores["ControladorContato"] = controladorContato;
         }
 
-
         public void ExecutarSubMenu(string nomeControlador)
         {
             if (nomeControlador == "ControladorTarefa")

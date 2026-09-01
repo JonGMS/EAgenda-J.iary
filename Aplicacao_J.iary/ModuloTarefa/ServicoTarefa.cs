@@ -1,4 +1,5 @@
-﻿using Dominio_J.iary.Compartilhado;
+﻿using Aplicacao_J.iary.ModuloCriptografar;
+using Dominio_J.iary.Compartilhado;
 using Dominio_J.iary.ModuloRotina;
 using Dominio_J.iary.ModuloTarefa;
 using Dominio_J.iary.ModuloUsuario;
@@ -14,14 +15,21 @@ namespace Aplicacao_J.iary.ModuloTarefa
 {
     public class ServicoTarefa
     {
-        private IRepositorioRotina RepositorioRotina;
-        private IRepositorioTarefa RepositorioTarefa;
+        private readonly IRepositorioRotina RepositorioRotina;
+        private readonly IRepositorioTarefa RepositorioTarefa;
         private readonly IContextoPersistencia ContextoPersistencia;
-        public ServicoTarefa(IRepositorioTarefa repositorio, IContextoPersistencia contextoPersistencia, IRepositorioRotina repositorioRotina)
+        private readonly ServicoCriptografia servicoCriptografia;
+
+        public ServicoTarefa(
+            IRepositorioTarefa repositorio,
+            IContextoPersistencia contextoPersistencia,
+            IRepositorioRotina repositorioRotina,
+            ServicoCriptografia servicoCripto)
         {
             RepositorioTarefa = repositorio;
             ContextoPersistencia = contextoPersistencia;
             RepositorioRotina = repositorioRotina;
+            servicoCriptografia = servicoCripto;
         }
         public Result<Tarefa> Inserir(Tarefa tarefa, List <Rotina> rotinas)
         {
@@ -31,7 +39,15 @@ namespace Aplicacao_J.iary.ModuloTarefa
                 if(validador.IsFailed)
                     return validador;
 
-                RepositorioTarefa.Inserir(tarefa);
+                if (tarefa.Armazenamento == 'C')
+                {
+                    Tarefa tarefaCriptografada = CriptografarTarefa(tarefa);
+                    RepositorioTarefa.Inserir(tarefaCriptografada);
+                }
+                else
+                {
+                    RepositorioTarefa.Inserir(tarefa);
+                }
 
                 foreach (var rotina in rotinas)
                 {
@@ -114,6 +130,18 @@ namespace Aplicacao_J.iary.ModuloTarefa
             {
                 return new List<Tarefa>();
             }
+        }
+        private Tarefa CriptografarTarefa(Tarefa tarefa)
+        {
+            tarefa.Titulo = servicoCriptografia.Criptografar(tarefa.Titulo);
+
+            if (!string.IsNullOrWhiteSpace(tarefa.Descricao))
+            {
+                tarefa.Descricao =
+                    servicoCriptografia.Criptografar(tarefa.Descricao);
+            }
+
+            return tarefa;
         }
     }
 }

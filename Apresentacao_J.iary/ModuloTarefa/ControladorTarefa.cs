@@ -16,21 +16,21 @@ namespace Apresentacao_J.iary.ModuloTarefa
     {
         public UCInserir ucInserir;
         private Usuario Logged;
-
+        private IServiceLocator Service;
         private ServicoTarefa Servico;
-        public ControladorTarefa(UCInserir inserir, ServicoTarefa servicoTarefa, Usuario usuario)
+        public ControladorTarefa(UCInserir inserir, ServicoTarefa servicoTarefa, Usuario usuario, IServiceLocator service)
         {
             ucInserir = inserir;
             Logged = usuario;
             //ucInserir = inserir;
             Servico = servicoTarefa;
-
+            Service = service; 
         }
 
         public override void Inserir()
         {
 
-            UCTarefa tarefa = new UCTarefa(Logged);
+            UCTarefa tarefa = new UCTarefa(Logged, Service);
             ucInserir.panelFormulario.Controls.Clear();
             tarefa.GravarDados = Servico.Inserir;
             tarefa.Dock = DockStyle.Fill;
