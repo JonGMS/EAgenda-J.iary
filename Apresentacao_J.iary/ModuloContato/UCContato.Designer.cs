@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCContato));
             labelErroTitulo = new Label();
             comboBoxCategoria = new ComboBox();
             labelCategoria = new Label();
@@ -52,8 +53,8 @@
             textBoxPesquisa = new TextBox();
             label2 = new Label();
             buttonAdicionarCategoria = new Button();
-            button1 = new Button();
-            button2 = new Button();
+            buttonEditar = new Button();
+            buttonExcluir = new Button();
             labelMensagemErroCategoria = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -299,31 +300,33 @@
             buttonAdicionarCategoria.UseVisualStyleBackColor = false;
             buttonAdicionarCategoria.Click += buttonAdicionarCategoria_Click;
             // 
-            // button1
+            // buttonEditar
             // 
-            button1.BackColor = Color.DimGray;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.Font = new Font("Copperplate Gothic Light", 12F);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(1333, 149);
-            button1.Name = "button1";
-            button1.Size = new Size(66, 61);
-            button1.TabIndex = 46;
-            button1.Text = "+";
-            button1.UseVisualStyleBackColor = false;
+            buttonEditar.BackColor = Color.Transparent;
+            buttonEditar.FlatAppearance.BorderSize = 0;
+            buttonEditar.FlatStyle = FlatStyle.Flat;
+            buttonEditar.Font = new Font("Copperplate Gothic Light", 12F);
+            buttonEditar.ForeColor = Color.White;
+            buttonEditar.Image = (Image)resources.GetObject("buttonEditar.Image");
+            buttonEditar.Location = new Point(1333, 149);
+            buttonEditar.Name = "buttonEditar";
+            buttonEditar.Size = new Size(60, 60);
+            buttonEditar.TabIndex = 46;
+            buttonEditar.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // buttonExcluir
             // 
-            button2.BackColor = Color.DimGray;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.Font = new Font("Copperplate Gothic Light", 12F);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(1405, 149);
-            button2.Name = "button2";
-            button2.Size = new Size(66, 61);
-            button2.TabIndex = 47;
-            button2.Text = "+";
-            button2.UseVisualStyleBackColor = false;
+            buttonExcluir.BackColor = Color.Transparent;
+            buttonExcluir.FlatAppearance.BorderSize = 0;
+            buttonExcluir.FlatStyle = FlatStyle.Flat;
+            buttonExcluir.Font = new Font("Copperplate Gothic Light", 12F);
+            buttonExcluir.ForeColor = Color.White;
+            buttonExcluir.Image = (Image)resources.GetObject("buttonExcluir.Image");
+            buttonExcluir.Location = new Point(1405, 149);
+            buttonExcluir.Name = "buttonExcluir";
+            buttonExcluir.Size = new Size(60, 60);
+            buttonExcluir.TabIndex = 47;
+            buttonExcluir.UseVisualStyleBackColor = false;
             // 
             // labelMensagemErroCategoria
             // 
@@ -340,8 +343,8 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(labelMensagemErroCategoria);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(buttonExcluir);
+            Controls.Add(buttonEditar);
             Controls.Add(buttonAdicionarCategoria);
             Controls.Add(label1);
             Controls.Add(textBoxPesquisa);
@@ -399,8 +402,8 @@
         public TextBox textBoxPesquisa;
         private Label label2;
         private Button buttonAdicionarCategoria;
-        private Button button1;
-        private Button button2;
+        private Button buttonEditar;
+        private Button buttonExcluir;
         private Label labelMensagemErroCategoria;
     }
 }
