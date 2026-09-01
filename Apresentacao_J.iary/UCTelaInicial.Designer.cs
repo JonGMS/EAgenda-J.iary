@@ -166,6 +166,7 @@
             buttonContato.TabIndex = 2;
             buttonContato.Text = "Contato";
             buttonContato.UseVisualStyleBackColor = true;
+            buttonContato.Click += buttonContato_Click;
             // 
             // buttonCofre
             // 
