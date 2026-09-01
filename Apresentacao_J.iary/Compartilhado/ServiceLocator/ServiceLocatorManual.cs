@@ -28,6 +28,9 @@ using Apresentacao_J.iary.ModuloCofre;
 using Infra_BancoDadosORM_J.iary.ModuloCofre;
 using Dominio_J.iary.ModuloCofre;
 using Aplicacao_J.iary.ModuloCriptografar;
+using Apresentacao_J.iary.ModuloUsuario.ModuloPerfil;
+using Apresentacao_J.iary.ModuloPerfil;
+using Apresentacao_J.iary.ModuloContato;
 
 namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
 {
@@ -99,11 +102,20 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
         public void RegistrarTelaInicial(UCTelaInicial telaInicial)
         {
             var ucInserir = new UCInserir(this);
-            this.ucInserir = ucInserir;
-            controladores["ControladorInserir"] =
-                new ControladorInserir(telaInicial, this, ucInserir);
+            //this.ucInserir = ucInserir;
+            controladores["ControladorInserir"] = new ControladorInserir(telaInicial, this, ucInserir);
+
+            var ucSubMenuPerfil = new UCSubMenuPerfil(this);
+            var controladorSubMenuPerfil = new ControladorSubMenuPerfil(this, telaInicial, ucSubMenuPerfil);
+            controladores["ControladorSubMenuPerfil"] = controladorSubMenuPerfil;
 
             var repositorioRotina = new RepositorioRotinaORM(contextoDadosOrm);
+
+
+
+            var ucPerfil = new UCPerfil();
+            var controladorPerfil = new ControladorPerfil(telaInicial);
+            controladores["ControladorPerfil"] = controladorPerfil;
 
             var repositorioCofre = new RepositorioCofreORM(contextoDadosOrm);
             var servicoCofre = new ServicoCofre(repositorioCofre, contextoDadosOrm);
@@ -126,11 +138,12 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             var controladorNota = new ControladorNota(ucInserir, servicoNota, Logged, this, servicoCategoria, servicoTarefa);
             inserir["ControladorNota"] = controladorNota.Inserir;
 
-
+            var controladorContato = new ControladorContato(telaInicial, this, Logged, servicoCategoria);
+            controladores["ControladorContato"] = controladorContato;
         }
 
 
-        public void ExecutarInsercao(string nomeControlador)
+        public void ExecutarSubMenu(string nomeControlador)
         {
             if (nomeControlador == "ControladorTarefa")
             {
@@ -142,6 +155,8 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             }
             else if (nomeControlador == "ControladorCategoria")
                 inserir["ControladorCategoria"]();
+            else if (nomeControlador == "ControladorSubMenuPerfil")
+                inserir["ControladorSubMenuPerfil"]();
         }
 
         public Usuario ApresentarUsuario()
