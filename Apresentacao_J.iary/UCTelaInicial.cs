@@ -1,10 +1,12 @@
 ﻿using Apresentacao_J.iary.Compartilhado;
 using Apresentacao_J.iary.Compartilhado.ServiceLocator;
 using Apresentacao_J.iary.ModuloCofre;
+using Apresentacao_J.iary.ModuloContato;
 using Apresentacao_J.iary.ModuloDashboard;
 using Apresentacao_J.iary.ModuloInserir;
 using Apresentacao_J.iary.ModuloPerfil;
 using Apresentacao_J.iary.ModuloUsuario;
+using Apresentacao_J.iary.ModuloUsuario.ModuloPerfil;
 using Dominio_J.iary.ModuloUsuario;
 using System;
 using System.Collections.Generic;
@@ -58,29 +60,12 @@ namespace Apresentacao_J.iary
             labelUsuarioLogado.Left = direita - labelUsuarioLogado.Width;
         }
 
-        private UCSubMenuPerfil ucPerfil;
+        public UCSubMenuPerfil ucPerfil;
 
         private void panelComboPerfil_Click(object sender, EventArgs e)
         {
-            if(ucPerfil != null)
-            {
-                if(ucPerfil.Visible == true )
-                {
-                    ucPerfil.Visible = false;
-                    return;
-                }
-            }
-
-            if (ucPerfil == null || ucPerfil.IsDisposed)
-            {
-                ucPerfil = new UCSubMenuPerfil(this);
-                ucPerfil.Location = new Point(1620, 80);
-                this.Controls.Add(ucPerfil);
-                ucPerfil.BringToFront();
-            }
-
-            ucPerfil.Visible = true;
-
+            controlador = serviceLocator.Get<ControladorSubMenuPerfil>();
+            controlador.Inserir();
         }
 
         private void UCTelaInicial_MouseDown(object sender, MouseEventArgs e)
@@ -126,6 +111,12 @@ namespace Apresentacao_J.iary
             panelContent.BackColor = Color.Red;
 
 
+        }
+
+        private void buttonContato_Click(object sender, EventArgs e)
+        {
+            controlador = serviceLocator.Get<ControladorContato>();
+            controlador.Inserir();
         }
     }
 }
