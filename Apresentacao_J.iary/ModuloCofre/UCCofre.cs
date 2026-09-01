@@ -27,7 +27,7 @@ namespace Apresentacao_J.iary.ModuloCofre
             InitializeComponent();
         }
         public Func<Cofre, Result<Cofre>> GravarDados { get; set; }
-        public Func<bool> Verificar { get; set; }
+        public Func<Usuario, bool> Verificar { get; set; }
         public Func<Cofre, Result<Cofre>> Desbloquear { get; set; }
         public Cofre Cofre
         {
