@@ -32,9 +32,6 @@ namespace Apresentacao_J.iary
             InitializeComponent();
             logado = usuarioLogado;
             PersoalizarUsuario();
-            pictureBoxUsuarioIcon.Enabled = false;
-            pictureBoxCombo.Enabled = false;
-            panelContent.Controls.Add(new UCDashBoard());
         }
 
         private void buttonInserir_Click(object sender, EventArgs e)
@@ -58,6 +55,9 @@ namespace Apresentacao_J.iary
             int direita = labelUsuarioLogado.Right;
             labelUsuarioLogado.Text = logado.Username;
             labelUsuarioLogado.Left = direita - labelUsuarioLogado.Width;
+
+            pictureBoxUsuarioIcon.Enabled = false;
+            pictureBoxCombo.Enabled = false;
         }
 
         public UCSubMenuPerfil ucPerfil;
@@ -94,9 +94,13 @@ namespace Apresentacao_J.iary
 
         private void pictureBoxLogo_Click(object sender, EventArgs e)
         {
-            UCDashBoard dashboard = new UCDashBoard();
-            panelContent.Controls.Clear();
-            panelContent.Controls.Add(dashboard);
+            ApresentarDashBoard();
+        }
+
+        private void ApresentarDashBoard()
+        {
+            controlador = serviceLocator.Get<ControladorDashboard>();
+            controlador.Inserir();
         }
 
         private void buttonCofre_Click(object sender, EventArgs e)
@@ -110,13 +114,17 @@ namespace Apresentacao_J.iary
             }
             panelContent.BackColor = Color.Red;
 
-
         }
 
         private void buttonContato_Click(object sender, EventArgs e)
         {
             controlador = serviceLocator.Get<ControladorContato>();
             controlador.Inserir();
+        }
+
+        private void UCTelaInicial_Load(object sender, EventArgs e)
+        {
+            ApresentarDashBoard();
         }
     }
 }
