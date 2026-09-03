@@ -1,6 +1,7 @@
 ﻿using Dominio_J.iary.Compartilhado;
 using Infra_BancoDadosORM_J.iary.ModuloCategoria;
 using Infra_BancoDadosORM_J.iary.ModuloCofre;
+using Infra_BancoDadosORM_J.iary.ModuloContato;
 using Infra_BancoDadosORM_J.iary.ModuloNota;
 using Infra_BancoDadosORM_J.iary.ModuloRotina;
 using Infra_BancoDadosORM_J.iary.ModuloTarefa;
@@ -37,6 +38,7 @@ namespace Infra_BancoDadosORM_J.iary.Compartilhado
             //modelBuilder.ApplyConfiguration(new MapeadorRotinaORM());
             modelBuilder.ApplyConfiguration(new MapeadorDiaRotinaORM());
             modelBuilder.ApplyConfiguration(new MapeadorCofreORM());
+            modelBuilder.ApplyConfiguration(new MapeadorContatoORM());
             base.OnModelCreating(modelBuilder);
         }
 
