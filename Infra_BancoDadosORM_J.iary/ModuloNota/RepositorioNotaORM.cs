@@ -47,7 +47,9 @@ namespace Infra_BancoDadosORM_J.iary.ModuloNota
 
         public List<Nota> SelecionarTodos(Usuario logado)
         {
-            throw new NotImplementedException();
+            return notas
+            .Where(x => x.UsuarioId == logado.Id)
+            .ToList();
         }
 
         public Nota SelecionarNotaPorTitulo(Nota registro, Usuario logado)
