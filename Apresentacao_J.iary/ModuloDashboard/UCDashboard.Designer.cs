@@ -44,13 +44,19 @@
             labelSexta = new Label();
             labelSabado = new Label();
             labelTarefa = new Label();
-            panel1 = new Panel();
+            panelTarefa = new Panel();
+            dataGridViewTarefa = new DataGridView();
             panel2 = new Panel();
             panel3 = new Panel();
             panel5 = new Panel();
             labelNotas = new Label();
             labelContato = new Label();
             labelDiario = new Label();
+            dataGridViewNotas = new DataGridView();
+            panelTarefa.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewTarefa).BeginInit();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewNotas).BeginInit();
             SuspendLayout();
             // 
             // panelDomingo
@@ -199,17 +205,30 @@
             labelTarefa.TabIndex = 11;
             labelTarefa.Text = "Tarefas";
             // 
-            // panel1
+            // panelTarefa
             // 
-            panel1.BackColor = Color.FromArgb(247, 247, 247);
-            panel1.Location = new Point(489, 362);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(615, 463);
-            panel1.TabIndex = 12;
+            panelTarefa.BackColor = Color.FromArgb(247, 247, 247);
+            panelTarefa.Controls.Add(dataGridViewTarefa);
+            panelTarefa.Location = new Point(489, 362);
+            panelTarefa.Name = "panelTarefa";
+            panelTarefa.Size = new Size(615, 463);
+            panelTarefa.TabIndex = 12;
+            // 
+            // dataGridViewTarefa
+            // 
+            dataGridViewTarefa.BackgroundColor = Color.FromArgb(247, 247, 247);
+            dataGridViewTarefa.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewTarefa.Location = new Point(0, 0);
+            dataGridViewTarefa.Name = "dataGridViewTarefa";
+            dataGridViewTarefa.RowHeadersWidth = 51;
+            dataGridViewTarefa.Size = new Size(615, 463);
+            dataGridViewTarefa.TabIndex = 0;
+            dataGridViewTarefa.CellContentClick += dataGridView1_CellContentClick;
             // 
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(247, 247, 247);
+            panel2.Controls.Add(dataGridViewNotas);
             panel2.Location = new Point(29, 362);
             panel2.Name = "panel2";
             panel2.Size = new Size(385, 463);
@@ -234,7 +253,7 @@
             // labelNotas
             // 
             labelNotas.AutoSize = true;
-            labelNotas.BackColor = SystemColors.Control;
+            labelNotas.BackColor = Color.Transparent;
             labelNotas.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelNotas.Location = new Point(29, 314);
             labelNotas.Name = "labelNotas";
@@ -262,6 +281,16 @@
             labelDiario.TabIndex = 19;
             labelDiario.Text = "Diario";
             // 
+            // dataGridViewNotas
+            // 
+            dataGridViewNotas.BackgroundColor = Color.FromArgb(247, 247, 247);
+            dataGridViewNotas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewNotas.Location = new Point(0, 0);
+            dataGridViewNotas.Name = "dataGridViewNotas";
+            dataGridViewNotas.RowHeadersWidth = 51;
+            dataGridViewNotas.Size = new Size(385, 463);
+            dataGridViewNotas.TabIndex = 0;
+            // 
             // UCDashBoard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -272,7 +301,7 @@
             Controls.Add(panel5);
             Controls.Add(panel3);
             Controls.Add(panel2);
-            Controls.Add(panel1);
+            Controls.Add(panelTarefa);
             Controls.Add(labelTarefa);
             Controls.Add(labelSabado);
             Controls.Add(labelSexta);
@@ -291,6 +320,10 @@
             Controls.Add(panelDomingo);
             Name = "UCDashBoard";
             Size = new Size(1597, 919);
+            panelTarefa.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewTarefa).EndInit();
+            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewNotas).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -313,12 +346,14 @@
         private Label labelSexta;
         private Label labelSabado;
         private Label labelTarefa;
-        private Panel panel1;
+        private Panel panelTarefa;
         private Panel panel2;
         private Panel panel3;
         private Panel panel5;
         private Label labelNotas;
         private Label labelContato;
         private Label labelDiario;
+        private DataGridView dataGridViewTarefa;
+        private DataGridView dataGridViewNotas;
     }
 }
