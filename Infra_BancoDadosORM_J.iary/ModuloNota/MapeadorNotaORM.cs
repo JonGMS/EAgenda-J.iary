@@ -40,7 +40,9 @@ namespace Infra_BancoDadosORM_J.iary.ModuloNota
                 .IsRequired();
 
             builder.Property(x => x.IDTarefa)
-                .HasColumnName("ID_TAREFA");
+                .HasColumnName("ID_TAREFA")
+                .IsRequired(false);
+                
 
             builder.Property(x => x.CategoriaID)
                 .HasColumnName("ID_CATEGORIA");
