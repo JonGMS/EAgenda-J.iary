@@ -19,12 +19,12 @@ namespace Aplicacao_J.iary.ModuloNota
     public class ServicoNota
     {
         private IContextoPersistencia ContextoPersistencia;
-        private RepositorioNotaORM RepositorioNotaORM;
+        private RepositorioNotaORM RepositorioNota;
         private ServicoCriptografia servicoCriptografia;
         public ServicoNota(IContextoPersistencia contextoPersistencia, RepositorioNotaORM repositorioNota, ServicoCriptografia servicoCriptografia)
         {
             ContextoPersistencia = contextoPersistencia;
-            RepositorioNotaORM = repositorioNota;
+            RepositorioNota = repositorioNota;
             this.servicoCriptografia = servicoCriptografia;
         }
 
@@ -42,10 +42,10 @@ namespace Aplicacao_J.iary.ModuloNota
                 if (nota.Armazenamento == 'C')
                 {
                     var tarefaCriptografada = CriptografarNota(nota);
-                    RepositorioNotaORM.Inserir(tarefaCriptografada);
+                    RepositorioNota.Inserir(tarefaCriptografada);
                 }
                 else
-                    RepositorioNotaORM.Inserir(nota);
+                    RepositorioNota.Inserir(nota);
 
 
                 ContextoPersistencia.GravarDados();
@@ -105,7 +105,7 @@ namespace Aplicacao_J.iary.ModuloNota
         {
             try
             {
-                var notaEncontrada = RepositorioNotaORM.SelecionarNotaPorTitulo(nota, logado);
+                var notaEncontrada = RepositorioNota.SelecionarNotaPorTitulo(nota, logado);
                 var resultadoComparacao = notaEncontrada != null && notaEncontrada.Id != nota.Id &&
                 notaEncontrada.Titulo.Equals(nota.Titulo, StringComparison.OrdinalIgnoreCase) &&
                 notaEncontrada.Id != nota.Id;
@@ -114,6 +114,17 @@ namespace Aplicacao_J.iary.ModuloNota
             catch (Exception ex)
             {
                 return Result.Fail(ex.Message);
+            }
+        }
+        public Result<List<Nota>> SelecionarTodos(Usuario logado)
+        {
+            try
+            {
+                return RepositorioNota.SelecionarTodos(logado);
+            }
+            catch
+            {
+                return new List<Nota>();
             }
         }
     }
