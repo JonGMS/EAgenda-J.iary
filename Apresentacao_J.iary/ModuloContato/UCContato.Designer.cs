@@ -56,6 +56,7 @@
             buttonEditar = new Button();
             buttonExcluir = new Button();
             labelMensagemErroCategoria = new Label();
+            buttonFavorito = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -105,7 +106,7 @@
             textBoxNome.Font = new Font("Segoe UI", 12F);
             textBoxNome.Location = new Point(112, 165);
             textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(486, 34);
+            textBoxNome.Size = new Size(431, 34);
             textBoxNome.TabIndex = 22;
             // 
             // labelTitulo
@@ -338,10 +339,21 @@
             labelMensagemErroCategoria.Size = new Size(0, 17);
             labelMensagemErroCategoria.TabIndex = 48;
             // 
+            // buttonFavorito
+            // 
+            buttonFavorito.Location = new Point(549, 165);
+            buttonFavorito.Name = "buttonFavorito";
+            buttonFavorito.Size = new Size(49, 34);
+            buttonFavorito.TabIndex = 49;
+            buttonFavorito.Text = "❤️";
+            buttonFavorito.UseVisualStyleBackColor = true;
+            buttonFavorito.Click += buttonFavorito_Click;
+            // 
             // UCContato
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(buttonFavorito);
             Controls.Add(labelMensagemErroCategoria);
             Controls.Add(buttonExcluir);
             Controls.Add(buttonEditar);
@@ -405,5 +417,6 @@
         private Button buttonEditar;
         private Button buttonExcluir;
         private Label labelMensagemErroCategoria;
+        private Button buttonFavorito;
     }
 }
