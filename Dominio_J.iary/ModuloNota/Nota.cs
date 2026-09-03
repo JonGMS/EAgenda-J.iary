@@ -17,7 +17,7 @@ namespace Dominio_J.iary.ModuloNota
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public List<Anexo> Arquivos { get; set; }
-        public Tarefa Tarefa { get; set; }
+        public Tarefa? Tarefa { get; set; }
         public Guid? IDTarefa { get; set; }
         public Categoria Categoria { get; set; }
         public Guid? CategoriaID { get; set; }
