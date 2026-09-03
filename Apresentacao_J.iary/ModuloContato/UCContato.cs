@@ -33,7 +33,7 @@ namespace Apresentacao_J.iary.ModuloContato
         {
             get => contato; set => contato = value;
         }
-        private Func<Contato, Result<Contato>> GravarDados { get; set; }
+        public Func<Contato, Result<Contato>> GravarDados { get; set; }
         private void buttonAdicionarCategoria_Click(object sender, EventArgs e)
         {
             controlador = ServiceLocator.Get<ControladorCategoria>();
@@ -56,6 +56,7 @@ namespace Apresentacao_J.iary.ModuloContato
             contato.Empresa = textBoxEmpresa.Text;
             contato.TelefoneEmpresa = maskedTextBoxTelefoneEmpresa.Text;
             contato.Armazenamento = comboBoxArmazenamento.SelectedItem.ToString()[0];
+            contato.Favorito = Favorito;
         }
         private void PreencherComboBoxCategoria(List<Categoria> categorias)
         {
@@ -70,6 +71,20 @@ namespace Apresentacao_J.iary.ModuloContato
 
             comboBoxCategoria.SelectedIndex = 0;
             comboBoxArmazenamento.SelectedIndex = 0;
+        }
+        private bool Favorito = false;
+        private void buttonFavorito_Click(object sender, EventArgs e)
+        {
+            if(Favorito == false)
+            {
+                buttonFavorito.ForeColor = Color.HotPink;
+                Favorito = true;
+            }
+            else
+            {
+                buttonFavorito.ForeColor = Color.Black;
+                Favorito = false;
+            }
         }
     }
 }
