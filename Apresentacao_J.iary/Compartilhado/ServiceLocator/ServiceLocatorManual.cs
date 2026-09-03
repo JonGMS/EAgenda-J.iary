@@ -31,6 +31,9 @@ using Aplicacao_J.iary.ModuloCriptografar;
 using Apresentacao_J.iary.ModuloUsuario.ModuloPerfil;
 using Apresentacao_J.iary.ModuloPerfil;
 using Apresentacao_J.iary.ModuloContato;
+using Apresentacao_J.iary.ModuloDashboard;
+using Aplicacao_J.iary.ModuloContato;
+using Infra_BancoDadosORM_J.iary.ModuloContato;
 
 namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
 {
@@ -111,7 +114,7 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
 
             var repositorioRotina = new RepositorioRotinaORM(contextoDadosOrm);
 
-
+          
 
             var ucPerfil = new UCPerfil();
             var controladorPerfil = new ControladorPerfil(telaInicial);
@@ -138,8 +141,13 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             var controladorNota = new ControladorNota(ucInserir, servicoNota, Logged, this, servicoCategoria, servicoTarefa);
             inserir["ControladorNota"] = controladorNota.Inserir;
 
-            var controladorContato = new ControladorContato(telaInicial, this, Logged, servicoCategoria);
+            var repositorioContato = new RepositorioContatoORM(contextoDadosOrm);
+            var servicoContato = new ServicoContato(contextoDadosOrm, repositorioContato);
+            var controladorContato = new ControladorContato(telaInicial, this, Logged, servicoCategoria, servicoContato);
             controladores["ControladorContato"] = controladorContato;
+
+            var controladorDashboard = new ControladorDashboard(telaInicial, this, servicoTarefa, Logged, servicoNota, servicoCategoria);
+            controladores["ControladorDashboard"] = controladorDashboard;
         }
 
         public void ExecutarSubMenu(string nomeControlador)
