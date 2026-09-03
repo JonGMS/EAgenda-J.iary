@@ -43,11 +43,6 @@ namespace Infra_BancoDadosORM_J.iary.ModuloTarefa
             throw new NotImplementedException();
         }
 
-        public List<Tarefa> SelecionarTodos()
-        {
-            throw new NotImplementedException();
-        }
-
         public Tarefa SelecionarTarefaPorTitulo(string titulo)
         {
             return Tarefa.FirstOrDefault(x => x.Titulo == titulo);
