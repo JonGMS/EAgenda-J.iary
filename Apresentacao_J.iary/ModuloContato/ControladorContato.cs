@@ -1,4 +1,5 @@
 ﻿using Aplicacao_J.iary.ModuloCategoria;
+using Aplicacao_J.iary.ModuloContato;
 using Apresentacao_J.iary.Compartilhado;
 using Apresentacao_J.iary.Compartilhado.ServiceLocator;
 using Dominio_J.iary.ModuloCategoria;
@@ -17,16 +18,19 @@ namespace Apresentacao_J.iary.ModuloContato
         private IServiceLocator ServiceLocator;
         private Usuario Logged;
         private ServicoCategoria ServicoCategoria;
-        public ControladorContato(UCTelaInicial telaInicial, IServiceLocator service, Usuario usuarioLogado, ServicoCategoria servicoCategoria)
+        private ServicoContato ServicoContato;
+        public ControladorContato(UCTelaInicial telaInicial, IServiceLocator service, Usuario usuarioLogado, ServicoCategoria servicoCategoria, ServicoContato servicoContato)
         {
             Logged = usuarioLogado;
             TelaInicial = telaInicial;
             ServiceLocator = service;
             ServicoCategoria = servicoCategoria;
+            ServicoContato = servicoContato;
         }
         public override void Inserir()
         {
             UCContato ucContato = new UCContato(ServiceLocator, Logged, ObterCategorias());
+            ucContato.GravarDados = ServicoContato.Inserir;
             TelaInicial.panelContent.Controls.Clear();
             TelaInicial.panelContent.Controls.Add(ucContato);
         }
