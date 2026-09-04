@@ -25,9 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ORM", "ORM", "{0CECFD42-0C1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{B1B2D6DA-B53B-4487-A9B5-3D5AD8EB509E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra_BancoDadosSQL_J.iary", "Infra_BancoDadosSQL_J.iary\Infra_BancoDadosSQL_J.iary.csproj", "{CE995694-48B3-4963-9B06-FE914168E23F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra_BancoDadosSQL_J.iary", "Infra_BancoDadosSQL_J.iary\Infra_BancoDadosSQL_J.iary.csproj", "{CE995694-48B3-4963-9B06-FE914168E23F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra_BancoDadosORM_J.iary", "Infra_BancoDadosORM_J.iary\Infra_BancoDadosORM_J.iary.csproj", "{DCD6F857-DCD5-4BCB-9CC1-3196BEA58169}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra_BancoDadosORM_J.iary", "Infra_BancoDadosORM_J.iary\Infra_BancoDadosORM_J.iary.csproj", "{DCD6F857-DCD5-4BCB-9CC1-3196BEA58169}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
