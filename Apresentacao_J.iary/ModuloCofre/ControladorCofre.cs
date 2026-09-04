@@ -22,7 +22,14 @@ namespace Apresentacao_J.iary.ModuloCofre
             Logged = logado;
             this.servicoCofre = servicoCofre;
         }
-
+        public Form cofre = new Form()
+        {
+            FormBorderStyle = FormBorderStyle.None,
+            MaximizeBox = false,
+            MinimizeBox = true,
+            StartPosition = FormStartPosition.CenterScreen,
+            Size = new Size(542, 448)
+        };
 
         public override void Inserir()
         {
@@ -30,8 +37,19 @@ namespace Apresentacao_J.iary.ModuloCofre
 
             ucCofre.Dock = DockStyle.Fill;
             ucCofre.GravarDados = servicoCofre.Inserir;
-            ucCofre.Verificar =  servicoCofre.VerificarCofre;
+            if (servicoCofre.VerificarCofre(Logged))
+            {
+                ucCofre.labelTitulo.Text = "Cofre";
+                ucCofre.buttonDesbloquear.Text = "Desbloquear";
+            }
+            else if (!servicoCofre.VerificarCofre(Logged))
+            {
+                ucCofre.labelTitulo.Text = "Crie um cofre";
+                ucCofre.buttonDesbloquear.Text = "Criar";
+            }
             ucCofre.Desbloquear = servicoCofre.DesbloquearCofre;
+            cofre.Controls.Add(ucCofre);
+            cofre.ShowDialog();
         }
     }
 }
