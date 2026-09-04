@@ -24,6 +24,7 @@ namespace Apresentacao_J.iary.ModuloCofre
         {
             Logged = usuario;
             ServiceLocator = serviceLocator;
+            CofreCriado = serviceLocator.ConferirCofre();
             InitializeComponent();
         }
         public Func<Cofre, Result<Cofre>> GravarDados { get; set; }
@@ -41,13 +42,14 @@ namespace Apresentacao_J.iary.ModuloCofre
 
             if (CofreCriado)
             {
-                var resultado = Desbloquear(cofre);
+                var resultado = GravarDados(cofre);
                 ApresentarResultado(resultado);
+
                 
             }
             else
             {
-                var resultado = GravarDados(cofre);
+                var resultado = Desbloquear(cofre);
                 ApresentarResultado(resultado);
 
             }
@@ -55,15 +57,16 @@ namespace Apresentacao_J.iary.ModuloCofre
 
         private void ApresentarResultado(Result<Cofre> resultado)
         {
-            if (resultado.IsSuccess && CofreCriado)
+            if (resultado.IsSuccess && !CofreCriado)
             {
                 MessageBox.Show("Cofre desbloqueado com sucesso! Para bloqueá-lo novamente durante esta sessão, acesse seu perfil.");
                 ServiceLocator.ArmazenarCofre(cofre);
                 this.ParentForm.Hide();
             }
-            else if (resultado.IsSuccess && !CofreCriado)
+            else if (resultado.IsSuccess && CofreCriado)
             {
                 MessageBox.Show("Seu cofre foi criado com sucesso!");
+                ServiceLocator.ArmazenarCofre(cofre);
                 this.ParentForm.Hide();
 
             }
