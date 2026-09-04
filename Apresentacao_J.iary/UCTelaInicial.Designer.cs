@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCTelaInicial));
             panelMenu = new Panel();
             labelUsuarioLogado = new Label();
-            pictureBoxUsuarioIcon = new PictureBox();
             labelTool = new Label();
             pictureBoxLogo = new PictureBox();
             panelComboPerfil = new Panel();
             pictureBoxCombo = new PictureBox();
+            pictureBoxUsuarioIcon = new PictureBox();
             panelContent = new Panel();
             buttonInserir = new Button();
             buttonContato = new Button();
@@ -43,10 +43,10 @@
             buttonDiario = new Button();
             panelFooter = new Panel();
             panelMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxUsuarioIcon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             panelComboPerfil.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCombo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxUsuarioIcon).BeginInit();
             SuspendLayout();
             // 
             // panelMenu
@@ -54,7 +54,6 @@
             panelMenu.BackColor = Color.White;
             panelMenu.BorderStyle = BorderStyle.Fixed3D;
             panelMenu.Controls.Add(labelUsuarioLogado);
-            panelMenu.Controls.Add(pictureBoxUsuarioIcon);
             panelMenu.Controls.Add(labelTool);
             panelMenu.Controls.Add(pictureBoxLogo);
             panelMenu.Controls.Add(panelComboPerfil);
@@ -72,16 +71,6 @@
             labelUsuarioLogado.Size = new Size(0, 21);
             labelUsuarioLogado.TabIndex = 3;
             labelUsuarioLogado.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // pictureBoxUsuarioIcon
-            // 
-            pictureBoxUsuarioIcon.Image = (Image)resources.GetObject("pictureBoxUsuarioIcon.Image");
-            pictureBoxUsuarioIcon.Location = new Point(1835, 23);
-            pictureBoxUsuarioIcon.Name = "pictureBoxUsuarioIcon";
-            pictureBoxUsuarioIcon.Size = new Size(50, 50);
-            pictureBoxUsuarioIcon.TabIndex = 2;
-            pictureBoxUsuarioIcon.TabStop = false;
-            pictureBoxUsuarioIcon.Click += pictureBox1_Click;
             // 
             // labelTool
             // 
@@ -108,6 +97,7 @@
             // 
             panelComboPerfil.BackColor = Color.Transparent;
             panelComboPerfil.Controls.Add(pictureBoxCombo);
+            panelComboPerfil.Controls.Add(pictureBoxUsuarioIcon);
             panelComboPerfil.Location = new Point(1805, 23);
             panelComboPerfil.Name = "panelComboPerfil";
             panelComboPerfil.Size = new Size(83, 50);
@@ -123,6 +113,17 @@
             pictureBoxCombo.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBoxCombo.TabIndex = 4;
             pictureBoxCombo.TabStop = false;
+            // 
+            // pictureBoxUsuarioIcon
+            // 
+            pictureBoxUsuarioIcon.Image = (Image)resources.GetObject("pictureBoxUsuarioIcon.Image");
+            pictureBoxUsuarioIcon.Location = new Point(44, 6);
+            pictureBoxUsuarioIcon.Name = "pictureBoxUsuarioIcon";
+            pictureBoxUsuarioIcon.Size = new Size(36, 41);
+            pictureBoxUsuarioIcon.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxUsuarioIcon.TabIndex = 2;
+            pictureBoxUsuarioIcon.TabStop = false;
+            pictureBoxUsuarioIcon.Click += pictureBox1_Click;
             // 
             // panelContent
             // 
@@ -224,13 +225,14 @@
             Controls.Add(panelContent);
             Name = "UCTelaInicial";
             Size = new Size(1924, 1083);
+            Load += UCTelaInicial_Load;
             MouseDown += UCTelaInicial_MouseDown;
             panelMenu.ResumeLayout(false);
             panelMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxUsuarioIcon).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
             panelComboPerfil.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxCombo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxUsuarioIcon).EndInit();
             ResumeLayout(false);
         }
 
