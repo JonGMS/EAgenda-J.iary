@@ -3,6 +3,7 @@ using Aplicacao_J.iary.ModuloContato;
 using Apresentacao_J.iary.Compartilhado;
 using Apresentacao_J.iary.Compartilhado.ServiceLocator;
 using Dominio_J.iary.ModuloCategoria;
+using Dominio_J.iary.ModuloContatos;
 using Dominio_J.iary.ModuloUsuario;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace Apresentacao_J.iary.ModuloContato
         }
         public override void Inserir()
         {
-            UCContato ucContato = new UCContato(ServiceLocator, Logged, ObterCategorias());
+            UCContato ucContato = new UCContato(ServiceLocator, Logged, ObterCategorias(), ListarContatos());
             ucContato.GravarDados = ServicoContato.Inserir;
             TelaInicial.panelContent.Controls.Clear();
             TelaInicial.panelContent.Controls.Add(ucContato);
@@ -44,6 +45,33 @@ namespace Apresentacao_J.iary.ModuloContato
                 return resultadoListagem.Value;
 
             return new List<Categoria>();
+        }
+        public List<Contato> ListarContatos()
+        {
+            var resultadoListagem = ServicoContato.ListarTodos(Logged);
+
+            if (resultadoListagem.IsSuccess)
+                return ReorganizarFavoritos(resultadoListagem.Value);
+            else
+                return new List<Contato>();
+        }
+
+        public List<Contato> ReorganizarFavoritos(List<Contato> contatos)
+        {
+            List<Contato> listaOrganizada = new List<Contato>();
+            foreach (Contato contato in contatos)
+            {
+                if(contato.Favorito)
+                    listaOrganizada.Add(contato);
+            }
+            foreach (Contato contato in contatos)
+            {
+                if (!contato.Favorito)
+                    listaOrganizada.Add(contato);
+            }
+
+            return listaOrganizada;
+
         }
     }
 }
