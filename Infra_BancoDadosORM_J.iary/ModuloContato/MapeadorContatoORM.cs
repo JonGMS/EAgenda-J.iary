@@ -72,6 +72,15 @@ namespace Infra_BancoDadosORM_J.iary.ModuloContato
                 .HasColumnType("bit")
                 .HasDefaultValue(false)
                 .IsRequired();
+
+            builder.Property(x => x.UsuarioID)
+                .HasColumnName("USUARIO_ID")
+                .IsRequired();
+
+            builder.HasOne(x => x.Usuario)
+                .WithMany()
+                .HasForeignKey(x => x.UsuarioID)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
