@@ -44,7 +44,7 @@
             labelTelefoneEmpresa = new Label();
             textBoxEmpresa = new TextBox();
             labelEmpresa = new Label();
-            dataGridView1 = new DataGridView();
+            dataGridViewContatos = new DataGridView();
             buttonFinalizar = new Button();
             labelErroArmazenamento = new Label();
             comboBoxArmazenamento = new ComboBox();
@@ -57,7 +57,7 @@
             buttonExcluir = new Button();
             labelMensagemErroCategoria = new Label();
             buttonFavorito = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewContatos).BeginInit();
             SuspendLayout();
             // 
             // labelErroTitulo
@@ -203,15 +203,18 @@
             labelEmpresa.TabIndex = 35;
             labelEmpresa.Text = "Empresa:";
             // 
-            // dataGridView1
+            // dataGridViewContatos
             // 
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(760, 233);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(711, 517);
-            dataGridView1.TabIndex = 37;
+            dataGridViewContatos.AllowUserToAddRows = false;
+            dataGridViewContatos.AllowUserToDeleteRows = false;
+            dataGridViewContatos.BackgroundColor = Color.White;
+            dataGridViewContatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewContatos.Location = new Point(760, 233);
+            dataGridViewContatos.Name = "dataGridViewContatos";
+            dataGridViewContatos.ReadOnly = true;
+            dataGridViewContatos.RowHeadersWidth = 51;
+            dataGridViewContatos.Size = new Size(711, 517);
+            dataGridViewContatos.TabIndex = 37;
             // 
             // buttonFinalizar
             // 
@@ -365,7 +368,7 @@
             Controls.Add(comboBoxArmazenamento);
             Controls.Add(labelArmazenamento);
             Controls.Add(buttonFinalizar);
-            Controls.Add(dataGridView1);
+            Controls.Add(dataGridViewContatos);
             Controls.Add(textBoxEmpresa);
             Controls.Add(labelEmpresa);
             Controls.Add(maskedTextBoxTelefoneEmpresa);
@@ -383,7 +386,8 @@
             Controls.Add(labelTitulo);
             Name = "UCContato";
             Size = new Size(1597, 919);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Load += UCContato_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridViewContatos).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -405,7 +409,7 @@
         private Label labelTelefoneEmpresa;
         public TextBox textBoxEmpresa;
         private Label labelEmpresa;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridViewContatos;
         private Button buttonFinalizar;
         private Label labelErroArmazenamento;
         public ComboBox comboBoxArmazenamento;

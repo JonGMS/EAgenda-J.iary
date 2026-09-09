@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio_J.iary.Compartilhado;
+using Dominio_J.iary.ModuloUsuario;
 
 namespace Dominio_J.iary.ModuloContatos
 {
@@ -19,6 +20,8 @@ namespace Dominio_J.iary.ModuloContatos
         public string? TelefoneEmpresa { get; set; }
         public DateTime DataCadastro { get; set; } = DateTime.Now;
         public bool Favorito { get; set; }
+        public Usuario Usuario { get; set; }
+        public Guid UsuarioID { get; set; }
         public Contato()
         {
             

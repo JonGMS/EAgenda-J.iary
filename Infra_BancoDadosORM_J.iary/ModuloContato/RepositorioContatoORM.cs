@@ -1,4 +1,5 @@
 ﻿using Dominio_J.iary.Compartilhado;
+using Dominio_J.iary.ModuloCategoria;
 using Dominio_J.iary.ModuloContatos;
 using Dominio_J.iary.ModuloNota;
 using Dominio_J.iary.ModuloUsuario;
@@ -43,7 +44,10 @@ namespace Infra_BancoDadosORM_J.iary.ModuloContato
 
         public List<Contato> SelecionarTodos(Usuario logado)
         {
-            throw new NotImplementedException();
+            return Contatos
+            .Where(x => x.UsuarioID == logado.Id)
+            .OrderBy(x => x.Nome)
+            .ToList();
         }
     }
 }

@@ -142,7 +142,7 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             inserir["ControladorNota"] = controladorNota.Inserir;
 
             var repositorioContato = new RepositorioContatoORM(contextoDadosOrm);
-            var servicoContato = new ServicoContato(contextoDadosOrm, repositorioContato);
+            var servicoContato = new ServicoContato(contextoDadosOrm, repositorioContato, servicoCriptografia);
             var controladorContato = new ControladorContato(telaInicial, this, Logged, servicoCategoria, servicoContato);
             controladores["ControladorContato"] = controladorContato;
 
