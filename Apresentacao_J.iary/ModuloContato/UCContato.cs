@@ -31,6 +31,8 @@ namespace Apresentacao_J.iary.ModuloContato
             ServiceLocator = serviceLocator;
             Logged = usuarioLogado;
             InitializeComponent();
+            buttonEditar.Enabled = false;
+            buttonExcluir.Enabled = false;
             PreencherComboBoxCategoria(categorias);
             DataTable dt = PreencherCabecalho();
             PreencherContatos(contatos, dt);
@@ -38,7 +40,7 @@ namespace Apresentacao_J.iary.ModuloContato
 
         private void PreencherContatos(List<Contato> contatos, DataTable dt)
         {
-            foreach(Contato contato in contatos)
+            foreach (Contato contato in contatos)
             {
                 if (contato.Favorito)
                 {
@@ -200,6 +202,11 @@ namespace Apresentacao_J.iary.ModuloContato
         }
 
         private void UCContato_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewContatos_SelectionChanged(object sender, EventArgs e)
         {
 
         }
