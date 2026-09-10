@@ -47,16 +47,19 @@
             panelTarefa = new Panel();
             dataGridViewTarefa = new DataGridView();
             panel2 = new Panel();
+            dataGridViewNotas = new DataGridView();
             panel3 = new Panel();
             panel5 = new Panel();
+            dataGridViewContato = new DataGridView();
             labelNotas = new Label();
             labelContato = new Label();
             labelDiario = new Label();
-            dataGridViewNotas = new DataGridView();
             panelTarefa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewTarefa).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewNotas).BeginInit();
+            panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewContato).BeginInit();
             SuspendLayout();
             // 
             // panelDomingo
@@ -234,6 +237,16 @@
             panel2.Size = new Size(385, 463);
             panel2.TabIndex = 13;
             // 
+            // dataGridViewNotas
+            // 
+            dataGridViewNotas.BackgroundColor = Color.FromArgb(247, 247, 247);
+            dataGridViewNotas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewNotas.Location = new Point(0, 0);
+            dataGridViewNotas.Name = "dataGridViewNotas";
+            dataGridViewNotas.RowHeadersWidth = 51;
+            dataGridViewNotas.Size = new Size(385, 463);
+            dataGridViewNotas.TabIndex = 0;
+            // 
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(247, 247, 247);
@@ -245,10 +258,24 @@
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(247, 247, 247);
+            panel5.Controls.Add(dataGridViewContato);
             panel5.Location = new Point(1179, 629);
             panel5.Name = "panel5";
             panel5.Size = new Size(385, 196);
             panel5.TabIndex = 16;
+            // 
+            // dataGridViewContato
+            // 
+            dataGridViewContato.AllowUserToAddRows = false;
+            dataGridViewContato.AllowUserToDeleteRows = false;
+            dataGridViewContato.BackgroundColor = Color.White;
+            dataGridViewContato.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewContato.Location = new Point(0, 0);
+            dataGridViewContato.Name = "dataGridViewContato";
+            dataGridViewContato.ReadOnly = true;
+            dataGridViewContato.RowHeadersWidth = 51;
+            dataGridViewContato.Size = new Size(385, 196);
+            dataGridViewContato.TabIndex = 0;
             // 
             // labelNotas
             // 
@@ -280,16 +307,6 @@
             labelDiario.Size = new Size(89, 25);
             labelDiario.TabIndex = 19;
             labelDiario.Text = "Diario";
-            // 
-            // dataGridViewNotas
-            // 
-            dataGridViewNotas.BackgroundColor = Color.FromArgb(247, 247, 247);
-            dataGridViewNotas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewNotas.Location = new Point(0, 0);
-            dataGridViewNotas.Name = "dataGridViewNotas";
-            dataGridViewNotas.RowHeadersWidth = 51;
-            dataGridViewNotas.Size = new Size(385, 463);
-            dataGridViewNotas.TabIndex = 0;
             // 
             // UCDashBoard
             // 
@@ -324,6 +341,8 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewTarefa).EndInit();
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewNotas).EndInit();
+            panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewContato).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -355,5 +374,6 @@
         private Label labelDiario;
         private DataGridView dataGridViewTarefa;
         private DataGridView dataGridViewNotas;
+        private DataGridView dataGridViewContato;
     }
 }
