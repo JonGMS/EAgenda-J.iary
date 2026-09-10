@@ -1,9 +1,11 @@
 ﻿using Aplicacao_J.iary.ModuloCategoria;
+using Aplicacao_J.iary.ModuloContato;
 using Aplicacao_J.iary.ModuloNota;
 using Aplicacao_J.iary.ModuloTarefa;
 using Apresentacao_J.iary.Compartilhado;
 using Apresentacao_J.iary.Compartilhado.ServiceLocator;
 using Dominio_J.iary.ModuloCategoria;
+using Dominio_J.iary.ModuloContatos;
 using Dominio_J.iary.ModuloNota;
 using Dominio_J.iary.ModuloTarefa;
 using Dominio_J.iary.ModuloUsuario;
@@ -23,19 +25,21 @@ namespace Apresentacao_J.iary.ModuloDashboard
         private ServicoCategoria ServicoCategoria;
         private ServicoTarefa ServicoTarefa;
         private Usuario Logged;
-        public ControladorDashboard(UCTelaInicial telaInicial, IServiceLocator serviceLocator, ServicoTarefa servicoTarefa, Usuario usuarioLogado, ServicoNota servicoNota, ServicoCategoria servicoCategoria)
+        private ServicoContato ServicoContato;
+        public ControladorDashboard(UCTelaInicial telaInicial, IServiceLocator serviceLocator, ServicoTarefa servicoTarefa, Usuario usuarioLogado, ServicoNota servicoNota, ServicoCategoria servicoCategoria, ServicoContato servicoContato)
         {
             TelaInicial = telaInicial;
             ServiceLocator = serviceLocator;
             ServicoNota = servicoNota;
             ServicoCategoria = servicoCategoria;
             ServicoTarefa = servicoTarefa;
+            ServicoContato = servicoContato;
             Logged = usuarioLogado;
 
         }
         public override void Inserir()
         {
-            UCDashBoard board = new UCDashBoard(Logged, ServiceLocator, ObterTarefas(), ObterNotas(), ObterCategorias());
+            UCDashBoard board = new UCDashBoard(Logged, ServiceLocator, ObterTarefas(), ObterNotas(), ObterCategorias(), ObterContatosFavoritos());
             TelaInicial.panelContent.Controls.Clear();
             TelaInicial.panelContent.Controls.Add(board);
 
@@ -62,8 +66,22 @@ namespace Apresentacao_J.iary.ModuloDashboard
                 return resultado.Value;
             else
                 return new List<Tarefa>();
-            
-
+        }
+        private List<Contato> ObterContatosFavoritos()
+        {
+            var resultado = ServicoContato.SelecionarTodos(Logged);
+            List<Contato> contatosFavoritos = new List<Contato>();
+            if (resultado.IsSuccess)
+            {
+                foreach(Contato contato in resultado.Value)
+                {
+                    if (contato.Favorito)
+                    {
+                        contatosFavoritos.Add(contato);
+                    }
+                }
+            }
+            return contatosFavoritos;
         }
 
     }
