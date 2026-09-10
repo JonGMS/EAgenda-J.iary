@@ -146,7 +146,7 @@ namespace Apresentacao_J.iary.Compartilhado.ServiceLocator
             var controladorContato = new ControladorContato(telaInicial, this, Logged, servicoCategoria, servicoContato);
             controladores["ControladorContato"] = controladorContato;
 
-            var controladorDashboard = new ControladorDashboard(telaInicial, this, servicoTarefa, Logged, servicoNota, servicoCategoria);
+            var controladorDashboard = new ControladorDashboard(telaInicial, this, servicoTarefa, Logged, servicoNota, servicoCategoria, servicoContato);
             controladores["ControladorDashboard"] = controladorDashboard;
         }
 

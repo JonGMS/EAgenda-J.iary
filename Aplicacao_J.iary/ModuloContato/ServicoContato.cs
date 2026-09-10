@@ -70,7 +70,7 @@ namespace Aplicacao_J.iary.ModuloContato
             return Result.Ok();
         }
 
-        public Result<List<Contato>> ListarTodos(Usuario logado)
+        public Result<List<Contato>> SelecionarTodos(Usuario logado)
         {
             try
             {

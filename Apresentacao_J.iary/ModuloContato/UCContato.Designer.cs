@@ -215,6 +215,7 @@
             dataGridViewContatos.RowHeadersWidth = 51;
             dataGridViewContatos.Size = new Size(711, 517);
             dataGridViewContatos.TabIndex = 37;
+            dataGridViewContatos.SelectionChanged += dataGridViewContatos_SelectionChanged;
             // 
             // buttonFinalizar
             // 

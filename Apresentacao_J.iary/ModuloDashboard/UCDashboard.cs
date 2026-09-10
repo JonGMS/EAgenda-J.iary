@@ -1,6 +1,7 @@
 ﻿using Apresentacao_J.iary.Compartilhado.ServiceLocator;
 using Apresentacao_J.iary.ModuloTarefa;
 using Dominio_J.iary.ModuloCategoria;
+using Dominio_J.iary.ModuloContatos;
 using Dominio_J.iary.ModuloNota;
 using Dominio_J.iary.ModuloTarefa;
 using Dominio_J.iary.ModuloUsuario;
@@ -19,24 +20,31 @@ namespace Apresentacao_J.iary.ModuloDashboard
     public partial class UCDashBoard : UserControl
     {
         private IServiceLocator ServiceLocator;
-        public UCDashBoard(Usuario usuarioLogado, IServiceLocator serviceLocator, List<Tarefa> listaTarefas, List<Nota> listaNotas, List<Categoria> listaCategorias)
+        public UCDashBoard(Usuario usuarioLogado, IServiceLocator serviceLocator, List<Tarefa> listaTarefas, List<Nota> listaNotas, List<Categoria> listaCategorias, List<Contato> listaContatos)
         {
             InitializeComponent();
             ServiceLocator = serviceLocator;
             PersonalizarGridsColumns();
             PreencherGridTarefas(listaTarefas);
             PreencherGridNotas(listaNotas, listaCategorias);
+            preencherGridContatos(listaContatos);
         }
 
-
+        private void preencherGridContatos(List<Contato> listaContatos)
+        {
+            if (listaContatos.Count == 0)
+                return;
+            foreach(Contato contato in listaContatos)
+            {
+                dataGridViewContato.Rows.Add(contato.Nome, contato.Telefone);
+            }
+        }
 
         private void PreencherGridTarefas(List<Tarefa> tarefas)
         {
             if (tarefas.Count() == 0)
-            {
-                
                 return;
-            }
+
 
             foreach (var tarefa in tarefas)
             {
@@ -142,6 +150,8 @@ namespace Apresentacao_J.iary.ModuloDashboard
 
             dataGridViewTarefa.Columns.Add(colTitulo);
             dataGridViewTarefa.Columns.Add(colStatus);
+            dataGridViewTarefa.AllowUserToResizeRows = false;
+            dataGridViewTarefa.AllowUserToResizeColumns = false;
 
 
             // NOTAS
@@ -160,6 +170,27 @@ namespace Apresentacao_J.iary.ModuloDashboard
 
             dataGridViewNotas.Columns.Add(colTituloNota);
             dataGridViewNotas.Columns.Add(colStatusNota);
+            dataGridViewNotas.AllowUserToResizeRows = false;
+            dataGridViewNotas.AllowUserToResizeColumns = false;
+
+            //CONTATOS
+
+            dataGridViewContato.Columns.Clear();
+
+            var colNomeContato = new DataGridViewTextBoxColumn();
+            colNomeContato.Name = "Nome";
+            colNomeContato.HeaderText = "Nome";
+            colNomeContato.Width = 200;
+
+            var colTelefoneContato = new DataGridViewTextBoxColumn();
+            colTelefoneContato.Name = "Telefone";
+            colTelefoneContato.HeaderText = "Telefone";
+            colTelefoneContato.Width = 132;
+
+            dataGridViewContato.Columns.Add(colNomeContato);
+            dataGridViewContato.Columns.Add(colTelefoneContato);
+            dataGridViewContato.AllowUserToResizeRows = false;
+            dataGridViewContato.AllowUserToResizeColumns = false;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
