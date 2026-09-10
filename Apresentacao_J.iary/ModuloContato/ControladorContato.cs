@@ -48,7 +48,7 @@ namespace Apresentacao_J.iary.ModuloContato
         }
         public List<Contato> ListarContatos()
         {
-            var resultadoListagem = ServicoContato.ListarTodos(Logged);
+            var resultadoListagem = ServicoContato.SelecionarTodos(Logged);
 
             if (resultadoListagem.IsSuccess)
                 return ReorganizarFavoritos(resultadoListagem.Value);
